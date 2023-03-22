@@ -1,0 +1,31 @@
+﻿<Window x:Class="ContentManagementSystem.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ContentManagementSystem"
+        mc:Ignorable="d"
+        
+        Title="Content Management System" 
+        Icon="src/icon.png"
+        Height="600" Width="1000" 
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/src/bg_white.png" Stretch="UniformToFill"/>
+        </Grid.Background>
+
+        <!-- Izbor stranice koja se prikazuje, inicijalno je to Pocetna.xaml -->
+        <Frame x:FieldModifier="public" 
+               Name="aktivnost" 
+               NavigationUIVisibility="Hidden" 
+               Grid.Row="1" 
+               Grid.ColumnSpan="2" 
+               Margin="0, 0, 0, 0" 
+               Source="Frames/Login.xaml" 
+        />
+
+    </Grid>
+</Window>
