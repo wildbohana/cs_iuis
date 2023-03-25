@@ -15,14 +15,19 @@ using System.Windows.Shapes;
 
 namespace ContentManagementSystem.Frames
 {
-    /// <summary>
-    /// Interaction logic for Tabela.xaml
-    /// </summary>
-    public partial class Tabela : Page
+    public partial class ViewMb : Page
     {
-        public Tabela()
+        public ViewMb()
         {
             InitializeComponent();
+        }
+        private void ReturnBtn_Click(object sender, RoutedEventArgs e)
+        {
+            // Isprazni sve TextBlock prvo
+
+            // Vrati se na tabelu
+            NavigationService navService = NavigationService.GetNavigationService(this);
+            navService.Navigate(new System.Uri("/Frames/Table.xaml", UriKind.Relative));
         }
     }
 }

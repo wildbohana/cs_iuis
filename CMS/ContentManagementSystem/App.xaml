@@ -6,7 +6,8 @@
 
     <Application.Resources>
         <!-- Dodato: zaobljeni dugmići, drugačija boja dugmića kada se pređe mišem preko njih -->
-        <Style TargetType="Button" x:Key="roundBtn">
+        <!-- Dugme za prijavu -->
+        <Style TargetType="Button" x:Key="loginBtn">
             <Setter Property="Background" Value="LightGray"/>
             <Setter Property="Foreground" Value="#000"/>
             <Setter Property="Template">
@@ -21,6 +22,48 @@
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="AntiqueWhite"/>
+                    <Setter Property="Foreground" Value="#dd000000"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Dugme za brisanje -->
+        <Style TargetType="Button" x:Key="deleteBtn">
+            <Setter Property="Background" Value="PaleVioletRed"/>
+            <Setter Property="Foreground" Value="#000"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="10" BorderThickness="1" BorderBrush="#ddbb1100">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="LightPink"/>
+                    <Setter Property="Foreground" Value="#dd000000"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Dugme za dodavanje -->
+        <Style TargetType="Button" x:Key="addBtn">
+            <Setter Property="Background" Value="ForestGreen"/>
+            <Setter Property="Foreground" Value="#000"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="10" BorderThickness="1" BorderBrush="#dd33aa44">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="LightGreen"/>
                     <Setter Property="Foreground" Value="#dd000000"/>
                 </Trigger>
             </Style.Triggers>

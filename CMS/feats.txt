@@ -1,0 +1,4 @@
+Features:
+ - custom buttons
+ - custom confirmation dialog
+ - todo: select image dialog

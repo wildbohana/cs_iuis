@@ -22,14 +22,17 @@ namespace ContentManagementSystem.Frames
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        // Dugme za prijavu
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             // Da  li su sva polja popunjena?
             if (password.Password.Equals("") || username.Text.Equals(""))
             {
-                poruka.Text = "Niste popunili sva polja!";
+                poruka.Text = "Нисте попунили сва поља!";
                 poruka.Foreground = Brushes.Red;
 
+                password.Password = "";
+                username.Text = "";
                 username.BorderBrush = Brushes.Red;
                 password.BorderBrush = Brushes.Red;
             }
@@ -42,17 +45,17 @@ namespace ContentManagementSystem.Frames
 
                     // Otvara novu stranicu i prelazi na nju
                     NavigationService navService = NavigationService.GetNavigationService(this);
-                    navService.Navigate(new System.Uri("/Frames/Tabela.xaml", UriKind.Relative));
+                    navService.Navigate(new System.Uri("/Frames/Table.xaml", UriKind.Relative));
                 }
                 else
                 {
+                    poruka.Text = "Корисничко име или лозинка су нетачни!";
+                    poruka.Foreground = Brushes.Red;
+
                     password.Password = "";
                     username.Text = "";
                     username.BorderBrush = Brushes.Red;
                     password.BorderBrush = Brushes.Red;
-
-                    poruka.Text = "Korisničko ime ili lozinka su netačni!";                    
-                    poruka.Foreground = Brushes.Red;
                 }
             }
         }
@@ -80,6 +83,13 @@ namespace ContentManagementSystem.Frames
 
             // Pogrešni kredencijali
             return false;
+        }
+
+        // Dugme za izlaz (ako baš mora)
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            // 0xabc
+            System.Environment.Exit(2748);	
         }
     }
 }

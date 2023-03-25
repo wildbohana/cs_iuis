@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\wildb\Desktop\CMS\ContentManagementSystem\obj\Debug\
+C:\Users\wildbohana\Desktop\CMS\ContentManagementSystem\obj\Debug\
 ContentManagementSystem
 none
 false
 DEBUG;TRACE
-C:\Users\wildb\Desktop\CMS\ContentManagementSystem\App.xaml
-31379868035
+C:\Users\wildbohana\Desktop\CMS\ContentManagementSystem\App.xaml
+7613484818
 
-9-775598742
+13-1182935218
 13-1310406943
-Frames\Login.xaml;Frames\Tabela.xaml;MainWindow.xaml;
+Frames\AddNewMb.xaml;Frames\Login.xaml;Frames\Table.xaml;Frames\UpdateMb.xaml;Frames\ViewMb.xaml;MainWindow.xaml;Windows\DeletionConfirmation.xaml;
 
 False
 

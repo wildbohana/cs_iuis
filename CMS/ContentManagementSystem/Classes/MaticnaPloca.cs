@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ namespace ContentManagementSystem
         public string UrlRtf { get => urlRtf; set => urlRtf = value; }
         public DateTime DatumDodavanja { get => datumDodavanja; set => datumDodavanja = value; }
 
-        // Konstruktor
+        // Konstruktor        
         public MaticnaPloca(string naziv, string urlSlike, string urlRtf, DateTime datumDodavanja)
         {
             this.id = ++App.IdProizvoda;
@@ -31,5 +32,7 @@ namespace ContentManagementSystem
             this.urlRtf = urlRtf;
             this.datumDodavanja = datumDodavanja;
         }
+        //Dodati opciju da je podrazumevana vrednost za datum dodavanja ova ispod? 
+        //DateTime defaultDT = new DateTime(2012, 6, 6, 12, 0, 0);
     }
 }

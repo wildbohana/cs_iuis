@@ -1,0 +1,35 @@
+Trenutno radim:
+ - završavam izgled
+ - biranje slike
+ - unos imena modela
+
+RichTextBox srediti:
+ - sve potrebne funkcionalnosti (kopiraj kod lol)
+ - čuvanje *.rtf
+ - otvaranje *.rtf
+ - brisanje i same *.rtf datoteke, i reference na *.rtf datoteku brilikom brisanja
+
+Čuvanje objekta:
+ - validacija svih polja za unos
+ - export RichTextBox u *.rtf
+ - ?
+
+Brisanje objekta:
+ - brisanje RichTextBox datoteke
+ - kako zapamtiti izabrane ID kod CheckBox-a? 
+   (DataGridCheckBoxColumn, Binding uraditi - vrv na bool polje u klasi, pa proći kroz sve)
+   (dodati bool polje u klasu?) (i INotifyPropertyChanged onda mora da ide)
+ - ispis odgovarajuće poruke (MessageBox) ako ni jedan objekat nije izabran
+
+Hyperlink:
+ - kako to odraditi lol
+ - realizovati kao dvoklik na njega 
+   (ako mora jedan klik, samo u xaml napiši Click umesto DoubleClick)
+
+Na šta se odnosi serijalizacija sadržaja? Da se čuva u datoteku?
+
+Ne znam da li imam još nešto da mi treba
+Ako budem imala vremena, napraviti Custom MessageBox (da ceo program bude konzistentan)
+Ako budem imala vremena, izmeniti izgled tabele (pravi Custom u App.xaml)
+
+Dodaj svuda Try-Catch blokove (pravljenje objekata, brisanje objekata...)
