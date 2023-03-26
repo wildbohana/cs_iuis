@@ -30,7 +30,7 @@ namespace ContentManagementSystem
             else
             {
                 MessageBox.Show("Niste odabrali sliku!", "Greška!", MessageBoxButton.OK, MessageBoxImage.Error);
-                slika.Source = new BitmapImage(new Uri("/src/placeholder.png", UriKind.Relative));
+                slika.Source = new BitmapImage(new System.Uri("/Images/placeholder.png", UriKind.Relative));
                 trenutnaPutanja = string.Empty;
             }
 

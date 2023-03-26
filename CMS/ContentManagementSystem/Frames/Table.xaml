@@ -40,22 +40,23 @@
             </Label>
 
             <!-- Tabela -->
-            <DataGrid Grid.Row="2" Grid.Column="0" Name="dataGridSveMaticnePloce" ItemsSource="{Binding Skladiste}" 
+            <DataGrid Grid.Row="2" Grid.Column="0" x:Name="dataGridSveMaticnePloce" ItemsSource="{Binding Skladiste}" 
                       FontSize="14" FontWeight="Medium" IsReadOnly="True" 
                       Margin="4"
+                      SelectionMode="Single" CanUserResizeColumns="False"
                       AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" 
                       ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
                 <DataGrid.Columns>
-                    <DataGridCheckBoxColumn x:Name="izborZaBrisanje" Header="Бриши" Width="12*"/>
-                    <DataGridTextColumn Header="Модел матичне плоче" Width="100*" Binding="{Binding Path=Naziv}"/>
+                    <DataGridCheckBoxColumn x:Name="izborZaBrisanje" Header="Бриши" Width="12*" Binding="{Binding Brisanje}" />
+                    <DataGridTextColumn Header="Модел матичне плоче" Width="70*" Binding="{Binding Naziv}"/>
                     <DataGridTemplateColumn Header="Слика" Width="30*" IsReadOnly="True">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding Path=Slika}" Width="30"/>
+                                <Image Source="{Binding Slika}" Width="30"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Датум додавања" Width="30*" Binding="{Binding Path=DatumDodavanja}"/>
+                    <DataGridTextColumn Header="Датум додавања" Width="30*" Binding="{Binding DatumDodavanja, StringFormat={}{0:dd/MM/yy}}"/>
                 </DataGrid.Columns>
             </DataGrid>
 

@@ -17,11 +17,14 @@ namespace ContentManagementSystem.Frames
 {
     public partial class Login : Page
     {
+        #region INICIJALIZACIJA
         public Login()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region PRIJAVA
         // Dugme za prijavu
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
@@ -59,7 +62,9 @@ namespace ContentManagementSystem.Frames
                 }
             }
         }
+        #endregion
 
+        #region VALIDACIJA
         private bool validacija(string pass, string usr)
         {
             // Provera za admina
@@ -84,12 +89,15 @@ namespace ContentManagementSystem.Frames
             // Pogrešni kredencijali
             return false;
         }
+        #endregion
 
+        #region IZLAZ
         // Dugme za izlaz (ako baš mora)
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             // 2748 - 0xabc
             System.Environment.Exit(2748);
         }
+        #endregion
     }
 }

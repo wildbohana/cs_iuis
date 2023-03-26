@@ -17,11 +17,9 @@ using System.Windows.Shapes;
 
 namespace ContentManagementSystem.Frames
 {
+    // DATAGRID.SELECTEDINDEX !!!
     public partial class Table : Page
     {
-        private List<int> deleteIndexes = new List<int>();
-        private Dictionary<int, MaticnaPloca> spisakPloca = new Dictionary<int, MaticnaPloca>();
-
         public Table()
         {
             InitializeComponent();
@@ -56,16 +54,28 @@ namespace ContentManagementSystem.Frames
         // Dugme za brisanje izabranih
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
-            // Potvrda brisanja
-            DeletionConfirmation dc = new DeletionConfirmation();
-            dc.ShowDialog();
+            if (MainWindow.Skladiste.Count > 0)
+            { 
+                // Potvrda brisanja
+                DeletionConfirmation dc = new DeletionConfirmation();
+                dc.ShowDialog();
 
-            if (dc.Potvrda)
-                foreach (int idx in deleteIndexes)
-                    spisakPloca.Remove(idx);
-
-            // Za svaki slučaj ga vraćam na netačno
-            dc.Potvrda = false;
+                if (dc.Potvrda)
+                    foreach (MaticnaPloca mb in MainWindow.Skladiste)
+                        if (mb.Brisanje)
+                            MainWindow.Skladiste.Remove(mb);
+            }
+            else
+            {
+                MessageBox.Show("Skladište je prazno.", "Obaveštenje", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
         }
+
+        // Za update/view 
+        // TODO: jel ovo ovako treba?
+        //App.IzabranaMaticnaPloca = dataGridSveMaticnePloce.SelectedItem as MaticnaPloca;
+
+        // TODO: Click on hyperlink (proveri da li je App.UserAdmin, pa otvori View/Update)
+        // TODO: Napravi Hyperlink polje
     }
 }

@@ -33,8 +33,6 @@ C:\Users\wildb\Desktop\CMS\ContentManagementSystem\obj\Debug\ContentManagementSy
 C:\Users\wildb\Desktop\CMS\ContentManagementSystem\obj\Debug\Frames\Login.g.cs
 C:\Users\wildb\Desktop\CMS\ContentManagementSystem\obj\Debug\Frames\Login.baml
 C:\Users\wildb\Desktop\CMS\ContentManagementSystem\obj\Debug\App.baml
-C:\Users\wildb\Desktop\CMS\ContentManagementSystem\obj\Debug\Frames\Tabela.g.cs
-C:\Users\wildb\Desktop\CMS\ContentManagementSystem\obj\Debug\Frames\Tabela.baml
 C:\Users\wildbohana\Desktop\CMS\ContentManagementSystem\bin\Debug\ContentManagementSystem.exe.config
 C:\Users\wildbohana\Desktop\CMS\ContentManagementSystem\bin\Debug\ContentManagementSystem.exe
 C:\Users\wildbohana\Desktop\CMS\ContentManagementSystem\bin\Debug\ContentManagementSystem.pdb
@@ -64,3 +62,13 @@ C:\Users\wildbohana\Desktop\CMS\ContentManagementSystem\obj\Debug\Frames\UpdateM
 C:\Users\wildbohana\Desktop\CMS\ContentManagementSystem\obj\Debug\Frames\ViewMb.g.cs
 C:\Users\wildbohana\Desktop\CMS\ContentManagementSystem\obj\Debug\Frames\UpdateMb.baml
 C:\Users\wildbohana\Desktop\CMS\ContentManagementSystem\obj\Debug\Frames\ViewMb.baml
+C:\Users\wildb\Desktop\CMS\ContentManagementSystem\obj\Debug\Frames\AddNewMb.g.cs
+C:\Users\wildb\Desktop\CMS\ContentManagementSystem\obj\Debug\Frames\Table.g.cs
+C:\Users\wildb\Desktop\CMS\ContentManagementSystem\obj\Debug\Frames\UpdateMb.g.cs
+C:\Users\wildb\Desktop\CMS\ContentManagementSystem\obj\Debug\Frames\ViewMb.g.cs
+C:\Users\wildb\Desktop\CMS\ContentManagementSystem\obj\Debug\Windows\DeletionConfirmation.g.cs
+C:\Users\wildb\Desktop\CMS\ContentManagementSystem\obj\Debug\Frames\AddNewMb.baml
+C:\Users\wildb\Desktop\CMS\ContentManagementSystem\obj\Debug\Frames\Table.baml
+C:\Users\wildb\Desktop\CMS\ContentManagementSystem\obj\Debug\Frames\UpdateMb.baml
+C:\Users\wildb\Desktop\CMS\ContentManagementSystem\obj\Debug\Frames\ViewMb.baml
+C:\Users\wildb\Desktop\CMS\ContentManagementSystem\obj\Debug\Windows\DeletionConfirmation.baml

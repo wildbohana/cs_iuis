@@ -1,0 +1,42 @@
+MainWindow:
+ - sačuvaj indeks u neki .txt fajl
+ - učitavaj ga svaki put pri pokretanju programa (StreamReader)
+ - čuvaj ga svaki put pri gašenju programa (StreamWriter)
+
+-----------------
+
+Login:
+ - username
+ - password
+
+Tabela:
+ - izborZaBrisanje
+ - Naziv (HyperLink - todo)
+ - Slika (binding)
+ - DatumDodavanja (binding)
+
+View:
+ - model
+ - datum
+ - godina
+ - slika
+ - unosRTB
+
+Update:
+ - model
+ - godina
+ - slika
+ - unosRTB
+
+AddNew:
+ - model
+ - godina
+ - slika
+ - tglButtonItalic
+ - tglButtonBold
+ - tglButtonUndeline
+ - ComboBoxFamily
+ - ComboBoxSize
+ - ComboBoxColor
+ - brojReci
+ - unosRTB

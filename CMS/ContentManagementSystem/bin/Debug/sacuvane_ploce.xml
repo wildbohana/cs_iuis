@@ -1,2 +1,11 @@
 <?xml version="1.0"?>
-<ArrayOfMaticnaPloca xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+<ArrayOfMaticnaPloca xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <MaticnaPloca>
+    <Brisanje>false</Brisanje>
+    <GodinaProizvodnje>2022</GodinaProizvodnje>
+    <Naziv>jjjj</Naziv>
+    <UrlSlike>C:\Users\wildb\Pictures\wp\dorevenge.png</UrlSlike>
+    <UrlRtf>datoteka1.rtf</UrlRtf>
+    <DatumDodavanja>2023-03-27T00:42:17.209142+02:00</DatumDodavanja>
+  </MaticnaPloca>
+</ArrayOfMaticnaPloca>

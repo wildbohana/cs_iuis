@@ -8,18 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/about.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/add.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/addnew.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/bg_black.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/bg_white.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/change.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/delete.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/icon.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/placeholder.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/pusti.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/settings.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/user.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/view.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/bold.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/italic.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/underline.png")]
 
 
