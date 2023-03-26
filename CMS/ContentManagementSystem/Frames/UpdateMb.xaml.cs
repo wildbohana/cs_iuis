@@ -51,7 +51,7 @@ namespace ContentManagementSystem.Frames
         // Biranje slike
         private void addImageBtn_Click(object sender, RoutedEventArgs e)
         {
-            Classes.OdabirPutanje odabir = new Classes.OdabirPutanje();
+            OdabirPutanje odabir = new OdabirPutanje();
             trenutnaPutanja = odabir.Odabir_Putanje(slika);
         }
     }

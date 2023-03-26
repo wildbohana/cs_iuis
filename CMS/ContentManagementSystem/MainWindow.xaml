@@ -6,15 +6,17 @@
         xmlns:local="clr-namespace:ContentManagementSystem"
         mc:Ignorable="d"
         
+        Closing="Save"
+        
         Title="Content Management System" 
-        Icon="src/icon.png"
+        Icon="Images/icon.png"
         Height="600" Width="1000" 
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/src/bg_white.png" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="/Images/bg_white.png" Stretch="UniformToFill"/>
         </Grid.Background>
 
         <!-- Izbor stranice koja se prikazuje, inicijalno je to Login.xaml -->
@@ -24,7 +26,7 @@
                Grid.Row="1" 
                Grid.ColumnSpan="2" 
                Margin="0 0 0 0" 
-               Source="Frames/UpdateMb.xaml">
+               Source="Frames/Login.xaml">
         </Frame>
 
     </Grid>

@@ -16,3 +16,8 @@ richtextbox:
 na dnu - status bar (broj unesenih reči)
 
 serijalizacija u okviru Table.xaml
+
+checkbox:
+- bukvalno sve
+- proveri da li je bar jedan objekat izabran za brisanje
+  ako nije, poruka, ako jeste, dijalog

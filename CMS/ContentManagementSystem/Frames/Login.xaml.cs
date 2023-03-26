@@ -88,8 +88,8 @@ namespace ContentManagementSystem.Frames
         // Dugme za izlaz (ako baš mora)
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
-            // 0xabc
-            System.Environment.Exit(2748);	
+            // 2748 - 0xabc
+            System.Environment.Exit(2748);
         }
     }
 }

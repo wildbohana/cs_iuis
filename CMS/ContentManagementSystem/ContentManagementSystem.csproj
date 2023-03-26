@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\DataIO.cs" />
     <Compile Include="Classes\OdabirPutanje.cs" />
     <Compile Include="Frames\AddNewMb.xaml.cs">
       <DependentUpon>AddNewMb.xaml</DependentUpon>
@@ -139,25 +140,22 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\" />
     <Folder Include="RichTextFiles\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="src\bg_black.png" />
-    <Resource Include="src\bg_white.png" />
-    <Resource Include="src\icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="src\about.png" />
-    <Resource Include="src\add.png" />
-    <Resource Include="src\addnew.png" />
-    <Resource Include="src\change.png" />
-    <Resource Include="src\delete.png" />
-    <Resource Include="src\placeholder.png" />
-    <Resource Include="src\pusti.png" />
-    <Resource Include="src\settings.png" />
-    <Resource Include="src\user.png" />
-    <Resource Include="src\view.png" />
+    <Resource Include="Images\about.png" />
+    <Resource Include="Images\add.png" />
+    <Resource Include="Images\addnew.png" />
+    <Resource Include="Images\bg_black.png" />
+    <Resource Include="Images\bg_white.png" />
+    <Resource Include="Images\change.png" />
+    <Resource Include="Images\delete.png" />
+    <Resource Include="Images\icon.png" />
+    <Resource Include="Images\placeholder.png" />
+    <Resource Include="Images\pusti.png" />
+    <Resource Include="Images\settings.png" />
+    <Resource Include="Images\user.png" />
+    <Resource Include="Images\view.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

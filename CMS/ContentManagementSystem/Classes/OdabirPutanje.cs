@@ -7,7 +7,7 @@ using System.Windows.Media.Imaging;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace ContentManagementSystem.Classes
+namespace ContentManagementSystem
 {
     public class OdabirPutanje
     {

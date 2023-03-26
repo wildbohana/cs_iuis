@@ -20,6 +20,7 @@ namespace ContentManagementSystem.Frames
         public ViewMb()
         {
             InitializeComponent();
+            idmb.Text = "ID: ";
         }
         private void ReturnBtn_Click(object sender, RoutedEventArgs e)
         {

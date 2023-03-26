@@ -23,7 +23,7 @@ namespace ContentManagementSystem
         public string UrlRtf { get => urlRtf; set => urlRtf = value; }
         public DateTime DatumDodavanja { get => datumDodavanja; set => datumDodavanja = value; }
 
-        // Konstruktor        
+        // Konstruktor
         public MaticnaPloca(string naziv, string urlSlike, string urlRtf, DateTime datumDodavanja)
         {
             this.id = ++App.IdProizvoda;
@@ -32,6 +32,17 @@ namespace ContentManagementSystem
             this.urlRtf = urlRtf;
             this.datumDodavanja = datumDodavanja;
         }
+
+        // Zbog serijalizacije, mora da postoji i konstruktor bez parametara
+        public MaticnaPloca()
+        {
+            id = 0;
+            naziv = "";
+            urlSlike = "";
+            urlRtf = "";
+            datumDodavanja = DateTime.MinValue;
+        }
+
         //Dodati opciju da je podrazumevana vrednost za datum dodavanja ova ispod? 
         //DateTime defaultDT = new DateTime(2012, 6, 6, 12, 0, 0);
     }

@@ -8,6 +8,7 @@
         
         Title="Deletion Confirmation" Height="130" Width="220"
         WindowStartupLocation="CenterScreen"
+        Icon="/Images/delete.png"
         ResizeMode="NoResize">
 
     <StackPanel>

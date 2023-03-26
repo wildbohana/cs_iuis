@@ -15,10 +15,10 @@
             <Label Content="Пријава" FontSize="36" HorizontalAlignment="Center" FontWeight="Bold" Height="60" Margin="10 0 10 0" VerticalAlignment="Top" />
 
             <Label Content="Корисничко име:" FontSize="16" FontWeight="SemiBold"/>
-            <TextBox Name="username" FontSize="13" FontWeight="Regular" Padding="4" />
+            <TextBox x:Name="username" FontSize="13" FontWeight="Regular" Padding="4" />
 
             <Label Content="Лозинка:" FontSize="16" FontWeight="SemiBold"/>
-            <PasswordBox Name="password" FontSize="13" FontWeight="Regular" Padding="4"/>
+            <PasswordBox x:Name="password" FontSize="13" FontWeight="Regular" Padding="4"/>
 
             <!-- <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center"> -->
                 <Button x:Name="dugme"

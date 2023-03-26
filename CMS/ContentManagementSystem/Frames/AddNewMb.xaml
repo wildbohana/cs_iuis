@@ -44,6 +44,7 @@
                            FontSize="14" FontWeight="SemiBold">
                 </TextBlock>
                 <TextBox HorizontalAlignment="Left" VerticalAlignment="Center"
+                         x:Name="unosImena"
                          Width="232" Height="28"
                          Padding="1 1 1 3"
                          FontSize="14">
@@ -58,13 +59,13 @@
                     x:Name="dodajSliku" 
                     Margin="4"
                     Width="100" Style="{StaticResource loginBtn}"
-                    Content="ИЗбор слике" Click="addImageBtn_Click">
+                    Content="ИЗбор слике" Click="AddImageBtn_Click">
             </Button>
 
             <!-- RichTextBox -->
             <RichTextBox Grid.Column="1" Grid.Row="1"
                          Margin="10" Padding="10"
-                         x:Name="unosRTB"
+                         x:Name="unosRTB" SelectionChanged="RTB_SelectionChanged"
                          Grid.RowSpan="3">
             </RichTextBox>
 

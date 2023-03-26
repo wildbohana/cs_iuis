@@ -38,6 +38,9 @@ namespace ContentManagementSystem.Frames
         private void ConfirmBtn_Click(object sender, RoutedEventArgs e)
         {
             // Dodaj novi
+            MaticnaPloca nova = null;
+            //nova = MaticnaPloca(...);
+            //MainWindow.Skladiste.Insert(nova.Id, nova);
 
             // Isprazni sve TextBlock
 
@@ -47,10 +50,16 @@ namespace ContentManagementSystem.Frames
         }
 
         // Biranje slike
-        private void addImageBtn_Click(object sender, RoutedEventArgs e)
+        private void AddImageBtn_Click(object sender, RoutedEventArgs e)
         {
-            Classes.OdabirPutanje odabir = new Classes.OdabirPutanje();
+            OdabirPutanje odabir = new OdabirPutanje();
             trenutnaPutanja = odabir.Odabir_Putanje(slika);
+        }
+
+        // RichTextBox
+        private void RTB_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
