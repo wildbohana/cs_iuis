@@ -45,18 +45,16 @@
                       Margin="4"
                       SelectionMode="Single" CanUserResizeColumns="False" CanUserResizeRows="False"
                       AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" 
-                      CanUserReorderColumns="False" CanUserAddRows="False"                    
+                      CanUserReorderColumns="False" CanUserAddRows="False" 
                       ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
                 <DataGrid.Columns>
                     <!-- Prva kolona - CheckBox -->
-                    <DataGridTemplateColumn x:Name="izborZaBrisanje" Header="Бриши" Width="12*" IsReadOnly="False">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <CheckBox IsChecked="{Binding Brisanje, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsThreeState="False"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    
+                    <DataGridCheckBoxColumn Header="Бриши" Width="12*"
+                                            x:Name="izborZaBrisanje"                                            
+                                            Binding="{Binding Brisanje, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            IsThreeState="False">
+                    </DataGridCheckBoxColumn>
+                                        
                     <!-- Druga kolona - Hyperlink -->
                     <DataGridHyperlinkColumn Header="Модел матичне плоче" x:Name="model" Width="70*" Binding="{Binding Naziv}" IsReadOnly="True">
                         <DataGridHyperlinkColumn.ElementStyle>
