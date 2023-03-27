@@ -28,9 +28,6 @@ namespace ContentManagementSystem.Frames
             // Mora prvo inicijalizacija
             InitializeComponent();
 
-            // TODO: OBRIŠI - OVO JE SAMO ZA TESTIRANJE
-            //App.IzabranaMaticnaPloca = MainWindow.Skladiste.ElementAt(1);
-
             // Podešavanja za RichTextBox
             ComboBoxFamily.ItemsSource = Fonts.SystemFontFamilies.OrderBy(f => f.Source);
             ComboBoxSize.ItemsSource = new List<double> { 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30 };

@@ -43,7 +43,7 @@
             <DataGrid Grid.Row="2" Grid.Column="0" x:Name="dataGridSveMaticnePloce" ItemsSource="{Binding Skladiste}" 
                       FontSize="14" FontWeight="Medium" 
                       Margin="4"
-                      SelectionMode="Single" CanUserResizeColumns="False"
+                      SelectionMode="Single" CanUserResizeColumns="False" CanUserResizeRows="False"
                       AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" 
                       CanUserReorderColumns="False"                      
                       ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
@@ -58,10 +58,13 @@
                     </DataGridTemplateColumn>
                     
                     <!-- Druga kolona - Hyperlink -->
-                    <DataGridTextColumn Header="Модел матичне плоче" Width="70*" 
-                                        Binding="{Binding Naziv}" 
-                                        IsReadOnly="True">                        
-                    </DataGridTextColumn>
+                    <DataGridHyperlinkColumn Header="Модел матичне плоче" x:Name="model" Width="70*" Binding="{Binding Naziv}" IsReadOnly="True">
+                        <DataGridHyperlinkColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <EventSetter Event="Hyperlink.Click" Handler="OnHyperlink_Click"/>
+                            </Style>
+                        </DataGridHyperlinkColumn.ElementStyle>
+                    </DataGridHyperlinkColumn>
 
                     <!-- Treća kolona - umanjeni prikaz slike -->
                     <DataGridTemplateColumn Header="Слика" Width="30*" IsReadOnly="True">

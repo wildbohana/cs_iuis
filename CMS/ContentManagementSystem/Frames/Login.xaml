@@ -11,7 +11,7 @@
 
     <Border Background="White" BorderBrush="White" BorderThickness="0" CornerRadius="20 20 20 20" Margin="300 70 300 90">
         <StackPanel Margin="70 40 70 20" Orientation="Vertical">
-            <Image x:Name="logo" Source="/src/user.png" Height="60" Width="60" HorizontalAlignment="Center" Margin="5 5 5 5"/>
+            <Image x:Name="logo" Source="/Images/user.png" Height="60" Width="60" HorizontalAlignment="Center" Margin="5 5 5 5"/>
             <Label Content="Пријава" FontSize="36" HorizontalAlignment="Center" FontWeight="Bold" Height="60" Margin="10 0 10 0" VerticalAlignment="Top" />
 
             <Label Content="Корисничко име:" FontSize="16" FontWeight="SemiBold"/>

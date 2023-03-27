@@ -60,6 +60,12 @@
                            FontSize="14" FontWeight="Regular"
                            Width="100" Height="24">
                 </TextBox>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                           Height="14" FontSize="8" FontWeight="Regular"
+                           Foreground="Gray"
+                           Text="(1980-2023)"
+                           Margin="5 0 0 0">                    
+                </TextBlock>
             </StackPanel>
 
             <!-- Slika -->
@@ -70,7 +76,7 @@
                     x:Name="dodajSliku" 
                     Margin="4"
                     Width="100" Style="{StaticResource loginBtn}"
-                    Content="ИЗбор слике" Click="AddImageBtn_Click">
+                    Content="Избор слике" Click="AddImageBtn_Click">
             </Button>
 
             <!-- RichTextBox -->

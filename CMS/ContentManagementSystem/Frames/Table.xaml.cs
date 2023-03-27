@@ -18,8 +18,9 @@ using System.Windows.Shapes;
 
 namespace ContentManagementSystem.Frames
 {
-    // TODO: Hyperlink, CheckBox onaj jedan viška
+    // TODO: CheckBox onaj jedan viška
     // TODO: BETA TESTING VEČERAS HOPEFULLY
+
     public partial class Table : Page
     {
         #region INICIJALIZACIJA
@@ -111,21 +112,27 @@ namespace ContentManagementSystem.Frames
         }
         #endregion
 
-        // Za update/view 
-        // TODO: ZAVRŠI OVO
-        private void Hyperlink_Click(object sender, RoutedEventArgs e)
+        #region HYPERLINK
+        // Pregled/izmena ploče
+        private void OnHyperlink_Click(object sender, RoutedEventArgs e)
         {
+            // Postavljanje reference na izabrani objekat
             App.IzabranaMaticnaPloca = MainWindow.Skladiste.ElementAt(dataGridSveMaticnePloce.SelectedIndex);
 
+            // Otvaranje odgovarajućeg prozora u zavisnosti od vrste korisnika
             if (App.AdminUser)
             {
-                // UpdateMb.xaml
+                // Admin - izmena ploče
+                NavigationService navService = NavigationService.GetNavigationService(this);
+                navService.Navigate(new System.Uri("/Frames/UpdateMb.xaml", UriKind.Relative));
             }
             else
             {
-                // ViewMb.xaml
-            }
-            
+                // Ostali - pregled ploče
+                NavigationService navService = NavigationService.GetNavigationService(this);
+                navService.Navigate(new System.Uri("/Frames/ViewMb.xaml", UriKind.Relative));
+            }            
         }
+        #endregion HYPERLINK
     }
 }
