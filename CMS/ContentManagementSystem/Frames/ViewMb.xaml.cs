@@ -18,23 +18,45 @@ namespace ContentManagementSystem.Frames
 {
     public partial class ViewMb : Page
     {
+        #region INICIJALIZACIJA
         public ViewMb()
         {
+            // Mora prvo inicijalizacija
+            InitializeComponent();
+
+            // TODO: OBRIŠI - OVO JE SAMO ZA TESTIRANJE
+            //App.IzabranaMaticnaPloca = MainWindow.Skladiste.ElementAt(1);
+
+            // Popunjavane polja sa podacima o ploči koju menjamo
+            model.Text = App.IzabranaMaticnaPloca.Naziv;
             godina.Text = App.IzabranaMaticnaPloca.GodinaProizvodnje.ToString();
-            model.Text = App.IzabranaMaticnaPloca.Naziv.ToString();
+            datum.Text = App.IzabranaMaticnaPloca.DatumDodavanja.ToShortDateString();
             slika.Source = new BitmapImage(new System.Uri(App.IzabranaMaticnaPloca.UrlSlike.ToString(), UriKind.Absolute));
-            //TODO:
-            //unosRtf.Source = App.IzabranaMaticnaPloca.UrlRtf;
-            datum.Text = App.IzabranaMaticnaPloca.DatumDodavanja.ToString();
 
-            InitializeComponent();            
+            TextRange textRange;
+            System.IO.FileStream fileStream;
+
+            if (System.IO.File.Exists(App.IzabranaMaticnaPloca.UrlRtf))
+            {
+                textRange = new TextRange(unosRTB.Document.ContentStart, unosRTB.Document.ContentEnd);
+                using (fileStream = new System.IO.FileStream(App.IzabranaMaticnaPloca.UrlRtf, System.IO.FileMode.OpenOrCreate))
+                {
+                    textRange.Load(fileStream, System.Windows.DataFormats.Rtf);
+                }
+            }
         }
+        #endregion
 
+        #region POVRATAK NAZAD
         private void ReturnBtn_Click(object sender, RoutedEventArgs e)
         {
+            // Referenca za izabranu ploču na null
+            App.IzabranaMaticnaPloca = null;
+
             // Vrati se na tabelu
             NavigationService navService = NavigationService.GetNavigationService(this);
             navService.Navigate(new System.Uri("/Frames/Table.xaml", UriKind.Relative));
         }
+        #endregion
     }
 }

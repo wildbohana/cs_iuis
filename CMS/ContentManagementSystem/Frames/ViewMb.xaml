@@ -63,11 +63,12 @@
                            Width="120" Height="24"
                            FontSize="14" FontWeight="SemiBold">
                 </TextBlock>
-                <TextBlock x:Name="datum"
-                           HorizontalAlignment="Left" VerticalAlignment="Center"
-                           FontSize="14" FontWeight="Bold"
-                           Width="80" Height="24">                    
-                </TextBlock>
+                <TextBox x:Name="datum"
+                         HorizontalAlignment="Left" VerticalAlignment="Center"
+                         FontSize="14" FontWeight="Regular"
+                         IsReadOnly="True"
+                         Width="80" Height="24">                    
+                </TextBox>
                 
                 <!-- Godina proizvodnje -->
                 <TextBlock Margin="10 0 0 0"
@@ -76,11 +77,12 @@
                            FontSize="14" FontWeight="SemiBold"
                            Width="140" Height="24">
                 </TextBlock>
-                <TextBlock x:Name="godina"
-                           HorizontalAlignment="Left" VerticalAlignment="Center"
-                           FontSize="14" FontWeight="Bold"
-                           Width="50" Height="24">
-                </TextBlock>
+                <TextBox x:Name="godina"
+                         HorizontalAlignment="Left" VerticalAlignment="Center"
+                         FontSize="14" FontWeight="Regular"
+                         IsReadOnly="True"
+                         Width="40" Height="24">
+                </TextBox>
             </StackPanel>
 
             <!-- Slika -->

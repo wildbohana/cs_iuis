@@ -31,11 +31,11 @@ namespace ContentManagementSystem
             Skladiste = serializer.DeSerializeObject<BindingList<MaticnaPloca>>("sacuvane_ploce.xml");
             if (Skladiste == null) Skladiste = new BindingList<MaticnaPloca>();
 
-            // Okidač DataBinding-a
-            DataContext = this;
-
             // Učitavanje indeksa iz fajla
             indeks = UcitajIndeks();
+
+            //string msg = "BROJ ELEMENATA JE: " + Skladiste.Count.ToString();
+            //MessageBox.Show(msg);
 
             InitializeComponent();
         }

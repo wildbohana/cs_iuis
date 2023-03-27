@@ -111,8 +111,7 @@
                                    FontSize="8">
                         </TextBlock>
                     </StatusBar>
-                </ToolBar>
-                
+                </ToolBar>                
             </StackPanel>
 
             <!-- Dugme za povratak -->

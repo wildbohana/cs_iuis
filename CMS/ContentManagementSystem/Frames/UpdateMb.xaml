@@ -49,7 +49,7 @@
 
             <!-- Godina proizvodnje -->
             <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" Margin="10">
-                <TextBlock Margin="0 0 0 0"
+                <TextBlock Margin="10 0 0 0"
                            Text="Година производње:"
                            HorizontalAlignment="Right" VerticalAlignment="Center"
                            FontSize="14" FontWeight="SemiBold"

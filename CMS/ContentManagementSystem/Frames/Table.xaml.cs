@@ -17,11 +17,14 @@ using System.Windows.Shapes;
 
 namespace ContentManagementSystem.Frames
 {
-    // DATAGRID.SELECTEDINDEX !!!
+    // TODO: POPRAVI TABELU JER NE RADI BINDING
     public partial class Table : Page
     {
         public Table()
         {
+            // Okidač DataBinding-a
+            DataContext = this;
+
             InitializeComponent();
 
             if (App.AdminUser)
@@ -72,10 +75,20 @@ namespace ContentManagementSystem.Frames
         }
 
         // Za update/view 
-        // TODO: jel ovo ovako treba?
-        //App.IzabranaMaticnaPloca = dataGridSveMaticnePloce.SelectedItem as MaticnaPloca;
+        // TODO: ZAVRŠI OVO
+        private void Hyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            App.IzabranaMaticnaPloca = MainWindow.Skladiste.ElementAt(dataGridSveMaticnePloce.SelectedIndex);
 
-        // TODO: Click on hyperlink (proveri da li je App.UserAdmin, pa otvori View/Update)
-        // TODO: Napravi Hyperlink polje
+            if (App.AdminUser)
+            {
+                // UpdateMb.xaml
+            }
+            else
+            {
+                // ViewMb.xaml
+            }
+            
+        }
     }
 }

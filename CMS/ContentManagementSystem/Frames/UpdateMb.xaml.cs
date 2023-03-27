@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Policy;
 using System.Text;
@@ -21,77 +22,180 @@ namespace ContentManagementSystem.Frames
         private string trenutnaPutanjaSlika = string.Empty;
         private string trenutnaPutanjaRtf = string.Empty;
 
+        #region INICIJALIZACIJA
         public UpdateMb()
         {
-            //imageSlika.Source = new BitmapImage(App.IzabranaMaticnaPloca.UrlSlika);
-
             // Mora prvo inicijalizacija
             InitializeComponent();
 
-            // Tek kasnije ide podešavanje ItemsSource za ComboBox
+            // TODO: OBRIŠI - OVO JE SAMO ZA TESTIRANJE
+            //App.IzabranaMaticnaPloca = MainWindow.Skladiste.ElementAt(1);
+
+            // Podešavanja za RichTextBox
             ComboBoxFamily.ItemsSource = Fonts.SystemFontFamilies.OrderBy(f => f.Source);
             ComboBoxSize.ItemsSource = new List<double> { 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30 };
             ComboBoxFamily.SelectedIndex = 2;
             ComboBoxColor.ItemsSource = new List<string>() { "Black", "White", "Yellow", "Red", "Purple", "Orange", "Green", "Brown", "Blue" };
             ComboBoxColor.SelectedIndex = 0;
 
-            slika.Source = new BitmapImage(new System.Uri(App.IzabranaMaticnaPloca.UrlSlike.ToString(), UriKind.Absolute));
-            //TODO:
-            // unosRTF.Source = ...
-        }
+            // Popunjavane polja sa podacima o ploči koju menjamo
+            trenutnaPutanjaSlika = App.IzabranaMaticnaPloca.UrlSlike.ToString();
 
-        // Odustajanje od izmena
+            model.Text = App.IzabranaMaticnaPloca.Naziv;
+            godina.Text = App.IzabranaMaticnaPloca.GodinaProizvodnje.ToString();
+            slika.Source = new BitmapImage(new System.Uri(trenutnaPutanjaSlika, UriKind.Absolute));
+
+            trenutnaPutanjaRtf = App.IzabranaMaticnaPloca.UrlRtf;
+            TextRange textRange;
+            System.IO.FileStream fileStream;
+
+            if (System.IO.File.Exists(trenutnaPutanjaRtf))
+            {
+                textRange = new TextRange(unosRTB.Document.ContentStart, unosRTB.Document.ContentEnd);
+                using (fileStream = new System.IO.FileStream(trenutnaPutanjaRtf, System.IO.FileMode.OpenOrCreate))
+                {
+                    textRange.Load(fileStream, System.Windows.DataFormats.Rtf);
+                }
+            }
+        }
+        #endregion
+
+        #region ODUSTAJANJE OD IZMENA
+        // Odustanak od izmena
         private void ReturnBtn_Click(object sender, RoutedEventArgs e)
         {
-            // TODO:
-            // Isprazni sve TextBlock prvo
+            // Referenca na null
+            App.IzabranaMaticnaPloca = null;
 
             // Vrati se na tabelu
             NavigationService navService = NavigationService.GetNavigationService(this);
             navService.Navigate(new System.Uri("/Frames/Table.xaml", UriKind.Relative));
         }
+        #endregion
 
-        // Potvrda izmena
-        private void ConfirmBtn_Click(object sender, RoutedEventArgs e)
-        {
-            // TODO:
-            // Sačuvaj sve izmene
-            try
-            {
-                int gp = int.Parse(godina.Text);
-                string nz = model.Text;
-                string url1 = trenutnaPutanjaSlika;
-                string url2 = trenutnaPutanjaRtf;
-
-                App.IzabranaMaticnaPloca.GodinaProizvodnje = gp;
-                App.IzabranaMaticnaPloca.Naziv = nz;
-                App.IzabranaMaticnaPloca.UrlSlike = url1;
-                App.IzabranaMaticnaPloca.UrlRtf = url2;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            // TODO:
-            // Isprazni sve TextBlock
-
-            // Vrati se na tabelu
-            NavigationService navService = NavigationService.GetNavigationService(this);
-            navService.Navigate(new System.Uri("/Frames/Table.xaml", UriKind.Relative));
-        }
-
+        #region IZBOR SLIKE
         // Biranje slike
         private void AddImageBtn_Click(object sender, RoutedEventArgs e)
         {
             OdabirPutanje odabir = new OdabirPutanje();
             trenutnaPutanjaSlika = odabir.Odabir_Putanje(slika);
         }
+        #endregion
 
-        //////////////////////////////////// RichTextBox ////////////////////////////////////
+        #region DODAVANJE NOVOG
+        // Potvrda čuvanja izmena
+        private void ConfirmBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (validate())
+            {
+                try
+                {
+                    TextRange textRange;
+                    FileStream fileStream;
+                    textRange = new TextRange(unosRTB.Document.ContentStart, unosRTB.Document.ContentEnd);
+                    fileStream = new FileStream(trenutnaPutanjaRtf, FileMode.Create);
+                    textRange.Save(fileStream, DataFormats.Rtf);
+                    fileStream.Close();
 
-        // TODO: Trebam još da nađem način da otvaram i čuvam RTF datoteku
+                    App.IzabranaMaticnaPloca.GodinaProizvodnje = int.Parse(godina.Text);
+                    App.IzabranaMaticnaPloca.Naziv = model.Text;
+                    App.IzabranaMaticnaPloca.UrlSlike = trenutnaPutanjaSlika;
 
+                    // Referencu na izabranu ploču vrati na null
+                    App.IzabranaMaticnaPloca = null;
+
+                    // Vrati se na tabelu
+                    NavigationService navService = NavigationService.GetNavigationService(this);
+                    navService.Navigate(new System.Uri("/Frames/Table.xaml", UriKind.Relative));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Greška!", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Popunite sva polja!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        #endregion
+
+        #region VALIDACIJA
+        // Pozvana prilikom klika na dugme za dodavanje novog
+        private bool validate()
+        {
+            bool result = true;
+
+            // Naziv modela
+            if (model.Text.Trim().Equals(""))
+            {
+                result = false;
+                model.Foreground = Brushes.Red;
+                model.BorderBrush = Brushes.Red;
+                model.BorderThickness = new Thickness(1);
+            }
+            else
+            {
+                model.Foreground = Brushes.Black;
+                model.BorderBrush = Brushes.Green;
+                model.BorderThickness = new Thickness(1);
+            }
+
+            // Godina proizvodnje
+            if (godina.Text.Trim().Equals(""))
+            {
+                result = false;
+                godina.Foreground = Brushes.Red;
+                godina.BorderBrush = Brushes.Red;
+                godina.BorderThickness = new Thickness(1);
+            }
+            else
+            {
+                bool isNumeric = int.TryParse(godina.Text, out _);
+
+                if (isNumeric)
+                {
+                    if (Int32.Parse(godina.Text) > 1980 && Int32.Parse(godina.Text) < 2023)
+                    {
+                        godina.Foreground = Brushes.Black;
+                        godina.BorderBrush = Brushes.Green;
+                        godina.BorderThickness = new Thickness(1);
+                    }
+                    else
+                    {
+                        result = false;
+                        godina.Foreground = Brushes.Red;
+                        godina.BorderBrush = Brushes.Red;
+                        godina.BorderThickness = new Thickness(1);
+                    }
+                }
+                else
+                {
+                    result = false;
+                    godina.Foreground = Brushes.Red;
+                    godina.BorderBrush = Brushes.Red;
+                    godina.BorderThickness = new Thickness(1);
+                }
+            }
+
+            // UrlSlika
+            if (trenutnaPutanjaSlika.Equals(String.Empty))
+            {
+                result = false;
+                okvirSlike.BorderBrush = Brushes.Red;
+                okvirSlike.BorderThickness = new Thickness(1);
+            }
+            else
+            {
+                okvirSlike.BorderBrush = Brushes.Green;
+                okvirSlike.BorderThickness = new Thickness(1);
+            }
+
+            return result;
+        }
+        #endregion
+
+        #region RICHTEXTBOX
         // ComboBox za izmene
         private void ComboBoxFamily_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -167,5 +271,6 @@ namespace ContentManagementSystem.Frames
         {
             BrojacReci();
         }
+        #endregion
     }
 }
