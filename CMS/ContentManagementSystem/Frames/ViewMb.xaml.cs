@@ -24,9 +24,6 @@ namespace ContentManagementSystem.Frames
             // Mora prvo inicijalizacija
             InitializeComponent();
 
-            // TODO: OBRIŠI - OVO JE SAMO ZA TESTIRANJE
-            //App.IzabranaMaticnaPloca = MainWindow.Skladiste.ElementAt(1);
-
             // Popunjavane polja sa podacima o ploči koju menjamo
             model.Text = App.IzabranaMaticnaPloca.Naziv;
             godina.Text = App.IzabranaMaticnaPloca.GodinaProizvodnje.ToString();

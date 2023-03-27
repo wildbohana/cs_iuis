@@ -32,7 +32,7 @@ namespace ContentManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Серијализација датотеке није успела!", "Грешка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -67,7 +67,7 @@ namespace ContentManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Десеријализација датотеке није успела!", "Грешка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             return objectOut;

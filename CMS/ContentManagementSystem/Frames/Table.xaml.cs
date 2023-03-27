@@ -104,7 +104,7 @@ namespace ContentManagementSystem.Frames
             }
             else
             {
-                MessageBox.Show("Skladište je prazno.", "Obaveštenje", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show("Складиште је празно.", "Обавештење.", MessageBoxButton.OK, MessageBoxImage.Asterisk);
             }
         }
         #endregion

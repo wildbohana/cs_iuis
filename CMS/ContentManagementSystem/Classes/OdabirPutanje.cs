@@ -18,7 +18,7 @@ namespace ContentManagementSystem
             var dialog = new Microsoft.Win32.OpenFileDialog();
             dialog.FileName = "";
             dialog.DefaultExt = ".png";
-            dialog.Filter = "SLIKA (.png)|*.png";
+            dialog.Filter = "Слика (.png)|*.png";
 
             bool? result = dialog.ShowDialog();
 
@@ -29,7 +29,7 @@ namespace ContentManagementSystem
             }
             else
             {
-                MessageBox.Show("Niste odabrali sliku!", "Greška!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Нисте одабрали слику!", "Грешка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 slika.Source = new BitmapImage(new System.Uri("/Images/placeholder.png", UriKind.Relative));
                 trenutnaPutanja = string.Empty;
             }

@@ -70,7 +70,7 @@ namespace ContentManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Greška prilikom učitavanja indeksa!", "Greška!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Грешка приликом учитавања индекса!", "Грешка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
@@ -93,7 +93,7 @@ namespace ContentManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Greška prilikom čuvanja indeksa!", "Greška!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Грешка приликом чувања индекса!", "Грешка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {

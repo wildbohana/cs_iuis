@@ -6,20 +6,21 @@
         xmlns:local="clr-namespace:ContentManagementSystem.Windows"
         mc:Ignorable="d"
         
-        Title="Deletion Confirmation" Height="130" Width="220"
+        Title="Потврда брисања" Height="140" Width="220"
         WindowStartupLocation="CenterScreen"
         Icon="/Images/delete.png"
         ResizeMode="NoResize">
-
+    
     <StackPanel>
-        <TextBlock Text="Da li ste sigurni da želite da obrišete izabrane objekte?" 
-                   TextWrapping="Wrap" FontSize="14" FontWeight="SemiBold"
-                   Padding="10 5" HorizontalAlignment="Center">            
+        <TextBlock Text="Да ли сте сигурни да желите да обришете изабране објекте?" 
+                   TextWrapping="Wrap" FontSize="14" FontWeight="Regular"
+                   TextAlignment="Center" HorizontalAlignment="Center"
+                   Padding="10 5">
         </TextBlock>
 
-        <StackPanel Height="40" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Content="Da" Width="50" FontSize="14" Margin="5 10 15 5" Style="{StaticResource addBtn}" Click="ConfirmBtn_Click" />
-            <Button Content="Ne" Width="50" FontSize="14" Margin="15 10 5 5" Style="{StaticResource deleteBtn}" Click="CancelBtn_Click"/>
+        <StackPanel Height="35" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="Да" Width="50" FontSize="14" Margin="5 5 15 5" Style="{StaticResource addBtn}" Click="ConfirmBtn_Click" />
+            <Button Content="Не" Width="50" FontSize="14" Margin="15 5 5 5" Style="{StaticResource deleteBtn}" Click="CancelBtn_Click"/>
         </StackPanel>
            
     </StackPanel>

@@ -107,12 +107,12 @@ namespace ContentManagementSystem.Frames
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Greška!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(ex.Message, "Грешка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             else
             {
-                MessageBox.Show("Popunite sva polja!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Попуните сва поља!", "Грешка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         #endregion
