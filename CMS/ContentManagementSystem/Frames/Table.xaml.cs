@@ -2,6 +2,7 @@
 using ContentManagementSystem.Windows;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,15 +18,18 @@ using System.Windows.Shapes;
 
 namespace ContentManagementSystem.Frames
 {
-    // TODO: POPRAVI TABELU JER NE RADI BINDING
+    // TODO: Hyperlink, CheckBox onaj jedan viška
+    // TODO: BETA TESTING VEČERAS HOPEFULLY
     public partial class Table : Page
     {
+        #region INICIJALIZACIJA
         public Table()
         {
+            InitializeComponent();
+
             // Okidač DataBinding-a
             DataContext = this;
-
-            InitializeComponent();
+            dataGridSveMaticnePloce.ItemsSource = MainWindow.Skladiste;
 
             if (App.AdminUser)
             {
@@ -38,7 +42,9 @@ namespace ContentManagementSystem.Frames
                 izborZaBrisanje.IsReadOnly = true;
             }
         }
+        #endregion
 
+        #region ODJAVA
         // Dugme za odjavu
         private void LogoutBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -46,14 +52,18 @@ namespace ContentManagementSystem.Frames
             NavigationService navService = NavigationService.GetNavigationService(this);
             navService.Navigate(new System.Uri("/Frames/Login.xaml", UriKind.Relative));
         }
+        #endregion
 
+        #region DODAJ NOVO
         // Dugme za dodavanje novih matičnih ploča
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
             NavigationService navService = NavigationService.GetNavigationService(this);
             navService.Navigate(new System.Uri("/Frames/AddNewMb.xaml", UriKind.Relative));
         }
+        #endregion
 
+        #region OBRIŠI IZABRANO
         // Dugme za brisanje izabranih
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -64,15 +74,42 @@ namespace ContentManagementSystem.Frames
                 dc.ShowDialog();
 
                 if (dc.Potvrda)
-                    foreach (MaticnaPloca mb in MainWindow.Skladiste)
+                {
+                    int temp = 1;
+                    MaticnaPloca mb;
+
+                    // Koji sam ja genije (dužina kolekcije se stalno menja, zato mora uslovan inkrement)
+                    for (int i = 0; i < MainWindow.Skladiste.Count; i += temp)
+                    {
+                        mb = MainWindow.Skladiste[i];
                         if (mb.Brisanje)
-                            MainWindow.Skladiste.Remove(mb);
+                        {
+                            try
+                            {
+                                string fajl = new System.Uri(mb.UrlRtf, UriKind.Relative).ToString();
+                                File.Delete(fajl);
+                                MainWindow.Skladiste.Remove(mb);
+
+                                temp = 0;
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message);
+                            }                            
+                        }
+                        else
+                        {
+                            temp = 1;
+                        }
+                    }
+                }                    
             }
             else
             {
                 MessageBox.Show("Skladište je prazno.", "Obaveštenje", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
+        #endregion
 
         // Za update/view 
         // TODO: ZAVRŠI OVO

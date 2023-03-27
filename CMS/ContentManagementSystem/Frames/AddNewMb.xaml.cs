@@ -63,7 +63,6 @@ namespace ContentManagementSystem.Frames
             {
                 try
                 {
-                    // TODO: Možda promeniti putanju da bude apsolutna?
                     MainWindow.indeks++;
                     string nazivRtf = "datoteka" + MainWindow.indeks.ToString() + ".rtf";
 

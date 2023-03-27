@@ -41,22 +41,42 @@
 
             <!-- Tabela -->
             <DataGrid Grid.Row="2" Grid.Column="0" x:Name="dataGridSveMaticnePloce" ItemsSource="{Binding Skladiste}" 
-                      FontSize="14" FontWeight="Medium" IsReadOnly="True" 
+                      FontSize="14" FontWeight="Medium" 
                       Margin="4"
                       SelectionMode="Single" CanUserResizeColumns="False"
                       AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" 
+                      CanUserReorderColumns="False"                      
                       ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
                 <DataGrid.Columns>
-                    <DataGridCheckBoxColumn x:Name="izborZaBrisanje" Header="Бриши" Width="12*" Binding="{Binding Brisanje}" />
-                    <DataGridTextColumn Header="Модел матичне плоче" Width="70*" Binding="{Binding Naziv}"/>
-                    <DataGridTemplateColumn Header="Слика" Width="30*" IsReadOnly="True">
+                    <!-- Prva kolona - CheckBox -->
+                    <DataGridTemplateColumn x:Name="izborZaBrisanje" Header="Бриши" Width="12*" IsReadOnly="False">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding Slika}" Width="30"/>
+                                <CheckBox IsChecked="{Binding Brisanje, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsThreeState="False"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Датум додавања" Width="30*" Binding="{Binding DatumDodavanja, StringFormat={}{0:dd/MM/yy}}"/>
+                    
+                    <!-- Druga kolona - Hyperlink -->
+                    <DataGridTextColumn Header="Модел матичне плоче" Width="70*" 
+                                        Binding="{Binding Naziv}" 
+                                        IsReadOnly="True">                        
+                    </DataGridTextColumn>
+
+                    <!-- Treća kolona - umanjeni prikaz slike -->
+                    <DataGridTemplateColumn Header="Слика" Width="30*" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding UrlSlike}" Width="80" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    
+                    <!-- Četvrta kolona - datum dodavanja -->
+                    <DataGridTextColumn Header="Датум додавања" Width="30*" 
+                                        Binding="{Binding DatumDodavanja, StringFormat={}{0:dd/MM/yy}}" 
+                                        IsReadOnly="True">
+                    </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
 

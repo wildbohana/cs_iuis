@@ -34,9 +34,6 @@ namespace ContentManagementSystem
             // Učitavanje indeksa iz fajla
             indeks = UcitajIndeks();
 
-            //string msg = "BROJ ELEMENATA JE: " + Skladiste.Count.ToString();
-            //MessageBox.Show(msg);
-
             InitializeComponent();
         }
         #endregion
