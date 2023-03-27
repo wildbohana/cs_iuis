@@ -45,7 +45,7 @@
                       Margin="4"
                       SelectionMode="Single" CanUserResizeColumns="False" CanUserResizeRows="False"
                       AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" 
-                      CanUserReorderColumns="False"                      
+                      CanUserReorderColumns="False" CanUserAddRows="False"                    
                       ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
                 <DataGrid.Columns>
                     <!-- Prva kolona - CheckBox -->

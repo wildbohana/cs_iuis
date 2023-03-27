@@ -8,8 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/bold.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/italic.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/underline.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icon.ico")]
 
 

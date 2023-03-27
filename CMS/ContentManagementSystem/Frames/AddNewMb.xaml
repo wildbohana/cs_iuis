@@ -90,31 +90,32 @@
                 </RichTextBox>
 
                 <ToolBar BorderThickness="1" BorderBrush="LightSlateGray" Width="380" Height="32" VerticalAlignment="Center" Margin="0 10 0 0">
-
-                    <ToggleButton Command="EditingCommands.ToggleItalic" x:Name="tglButtonItalic">
-                        <Image Source="/Images/italic.png"/>
-                    </ToggleButton>                    
-                    <ToggleButton Command="EditingCommands.ToggleBold" x:Name="tglButtonBold">
-                        <Image Source="/Images/bold.png"/>
-                    </ToggleButton>                    
-                    <ToggleButton Command="EditingCommands.ToggleUnderline" x:Name="tglButtonUnderline">
+                    <!-- Italic / Bold / Underline -->
+                    <ToggleButton Command="EditingCommands.ToggleItalic" x:Name="tglButtonItalic" Margin="2 0">
                         <Image Source="/Images/italic.png"/>
                     </ToggleButton>
-                    
-                    <Separator/>
+                    <ToggleButton Command="EditingCommands.ToggleBold" x:Name="tglButtonBold" Margin="2 0">
+                        <Image Source="/Images/bold.png"/>
+                    </ToggleButton>
+                    <ToggleButton Command="EditingCommands.ToggleUnderline" x:Name="tglButtonUnderline" Margin="2 0">
+                        <Image Source="/Images/underline.png"/>
+                    </ToggleButton>
 
-                    <ComboBox x:Name="ComboBoxFamily" Width="50" Margin="10 0" SelectionChanged="ComboBoxFamily_SelectionChanged"/>
-                    <ComboBox x:Name="ComboBoxSize" Width="50" Margin="10 0" SelectionChanged="ComboBoxSize_SelectionChanged"/>
-                    <ComboBox x:Name="ComboBoxColor" Width="50" Margin="10 0" SelectionChanged="ComboBoxColor_SelectionChanged"/>
+                    <Separator Margin="5"/>
 
-                    <Separator/>
+                    <ComboBox x:Name="ComboBoxFamily" Width="60" Margin="3 0" SelectionChanged="ComboBoxFamily_SelectionChanged"/>
+                    <ComboBox x:Name="ComboBoxSize" Width="60" Margin="3 0" SelectionChanged="ComboBoxSize_SelectionChanged"/>
+                    <ComboBox x:Name="ComboBoxColor" Width="60" Margin="3 0" SelectionChanged="ComboBoxColor_SelectionChanged"/>
 
-                    <StatusBar BorderThickness="1" BorderBrush="Black" Width="50" Height="20" HorizontalAlignment="Right">
+                    <Separator Margin="5"/>
+
+                    <StatusBar BorderThickness="1" BorderBrush="Black" Width="30" Height="20" HorizontalAlignment="Right" Margin="5 0">
                         <TextBlock x:Name="brojReci" 
-                                   Width="46" Height="12" 
+                                   Padding="1 1 3 1"
+                                   Width="20" Height="12" 
                                    TextAlignment="Center" 
                                    HorizontalAlignment="Center" VerticalAlignment="Center" 
-                                   FontSize="8">
+                                   FontSize="10">
                         </TextBlock>
                     </StatusBar>
                 </ToolBar>                

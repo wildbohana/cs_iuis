@@ -18,9 +18,6 @@ using System.Windows.Shapes;
 
 namespace ContentManagementSystem.Frames
 {
-    // TODO: CheckBox onaj jedan viška
-    // TODO: BETA TESTING VEČERAS HOPEFULLY
-
     public partial class Table : Page
     {
         #region INICIJALIZACIJA

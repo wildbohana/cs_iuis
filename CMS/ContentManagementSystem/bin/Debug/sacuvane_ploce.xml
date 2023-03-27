@@ -1,19 +1,2 @@
 <?xml version="1.0"?>
-<ArrayOfMaticnaPloca xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <MaticnaPloca>
-    <Brisanje>false</Brisanje>
-    <GodinaProizvodnje>2019</GodinaProizvodnje>
-    <Naziv>Asus B450M-A II</Naziv>
-    <UrlSlike>C:\Users\wildb\Pictures\wp\enola_holmes.png</UrlSlike>
-    <UrlRtf>datoteka12.rtf</UrlRtf>
-    <DatumDodavanja>2023-03-27T15:19:19.3716967+02:00</DatumDodavanja>
-  </MaticnaPloca>
-  <MaticnaPloca>
-    <Brisanje>false</Brisanje>
-    <GodinaProizvodnje>2018</GodinaProizvodnje>
-    <Naziv>Asus A320M-K</Naziv>
-    <UrlSlike>C:\Users\wildb\Pictures\wp\Look-at-the-stars-at-night.png</UrlSlike>
-    <UrlRtf>datoteka13.rtf</UrlRtf>
-    <DatumDodavanja>2023-03-27T15:21:54.2914013+02:00</DatumDodavanja>
-  </MaticnaPloca>
-</ArrayOfMaticnaPloca>
+<ArrayOfMaticnaPloca xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />

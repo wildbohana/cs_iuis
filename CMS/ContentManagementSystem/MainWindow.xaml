@@ -9,7 +9,7 @@
         Closing="Save"
         
         Title="Content Management System" 
-        Icon="Images/icon.png"
+        Icon="Images/icon.ico"
         Height="600" Width="1000" 
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">

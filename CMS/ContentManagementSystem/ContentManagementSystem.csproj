@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -139,7 +142,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\icon.ico" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\about.png" />
     <Resource Include="Images\add.png" />
@@ -148,7 +153,6 @@
     <Resource Include="Images\bg_white.png" />
     <Resource Include="Images\change.png" />
     <Resource Include="Images\delete.png" />
-    <Resource Include="Images\icon.png" />
     <Resource Include="Images\placeholder.png" />
     <Resource Include="Images\pusti.png" />
     <Resource Include="Images\settings.png" />
@@ -159,6 +163,9 @@
     <Resource Include="Images\bold.png" />
     <Resource Include="Images\italic.png" />
     <Resource Include="Images\underline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
