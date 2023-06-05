@@ -1,0 +1,102 @@
+﻿<Window x:Class="NetworkService.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NetworkService"
+        xmlns:viewModel="clr-namespace:NetworkService.ViewModel"
+        xmlns:views="clr-namespace:NetworkService.Views"
+        mc:Ignorable="d"
+
+        Title="Nadzor reaktora" 
+        Icon="Assets/icon.ico"
+        
+        Height="900" Width="1500" 
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <!-- Dodaj opciju čuvanja pri zatvaranju sa: Closing="Save" -->
+
+    <!-- ViewModeli -->
+    <Window.DataContext>
+        <viewModel:MainWindowViewModel />
+    </Window.DataContext>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+            <views:HomeView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:NetworkEntitiesViewModel}">
+            <views:NetworkEntitiesView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:NetworkDisplayViewModel}">
+            <views:NetworkDisplayView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:MeasurementGraphViewModel}">
+            <views:MeasurementGraphView />
+        </DataTemplate>
+    </Window.Resources>
+    
+    <!-- Prikaz -->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="100*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Navigacija -->
+        <Border Grid.Row="0" Margin="250 10" Background="White" CornerRadius="20">
+            <Grid TextBlock.FontSize="10" TextBlock.FontFamily="Roboto" TextBlock.TextAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <!-- TODO IZMENI DA DOBRO ISPIŠE -->
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding CurrentViewModel}" />
+
+                <!-- Početna stranica -->
+                <Button  Grid.Column="1" Background="Transparent" BorderBrush="Transparent" Command="{Binding NavCommand}" CommandParameter="home">
+                    <StackPanel>
+                        <Image Source="Assets/home.png" Stretch="Uniform" Width="26" Margin="5"/>
+                        <TextBlock Text="POČETNA"/>
+                    </StackPanel>
+                </Button>
+
+                <!-- Tabelarni prikaz -->
+                <Button  Grid.Column="2" Background="Transparent" BorderBrush="Transparent" Command="{Binding NavCommand}" CommandParameter="entities">
+                    <StackPanel>
+                        <Image Source="Assets/table.png" Stretch="Uniform" Width="26" Margin="5"/>
+                        <TextBlock Text="TABELA"/>
+                    </StackPanel>
+                </Button>
+
+                <!-- Mrežni prikaz -->
+                <Button  Grid.Column="3" Background="Transparent" BorderBrush="Transparent" Command="{Binding NavCommand}" CommandParameter="display">
+                    <StackPanel>
+                        <Image Source="Assets/view.png" Stretch="Uniform" Width="26" Margin="5"/>
+                        <TextBlock Text="MREŽA"/>
+                    </StackPanel>
+                </Button>
+
+                <!-- Grafovi -->
+                <Button  Grid.Column="4" Background="Transparent" BorderBrush="Transparent" Command="{Binding NavCommand}" CommandParameter="graphs">
+                    <StackPanel>
+                        <Image Source="Assets/graphs.png" Stretch="Uniform" Width="26" Margin="5"/>
+                        <TextBlock Text="GRAFIK"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </Border>
+        
+        <!-- Trenutni pogled -->
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.Background>
+                <ImageBrush ImageSource="/Assets/bg2.png" Stretch="UniformToFill"/>
+            </Grid.Background>
+        </Grid>
+        <ContentControl Grid.Row="1" Grid.Column="0" Content="{Binding CurrentViewModel}" Margin="10"/>
+    </Grid>
+</Window>
