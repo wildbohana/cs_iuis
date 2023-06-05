@@ -12,68 +12,14 @@ namespace NetworkService.ViewModel
 {
     public class NetworkEntitiesViewModel : BindableBase
     {
-        // TODO prepravi filter u pretragu
-        /*
-        public Reaktor selectedDevice;
+        #region PRETRAGA I DODAVANJE - POLJA
         public int idTb;
         public string nameTb;
         public string typeCb;
-        public int idFilterTb;
-        public string typeFilterCb;
-        public List<Reaktor> ReaktoriTemp;
-        public bool greaterThan;
-        public bool lessThan;
-        public bool equal;
-        */
-
-        public Reaktor selectedDevice;
-
-        // Za novog
-        public int idTb;
-        public string nameTb;
-
-        // Za pretragu
-        public string typeCb;
-        public int idFilterTb;
-        public string typeFilterCb;
-        public List<Reaktor> ReaktoriTemp;
-        public List<Reaktor> ReaktoriPretraga;
-
-        public bool pretragaNaziv;
-        public bool pretragaTip;
+        public bool pretragaPoTipu;
+        public bool pretragaPoNazivu;
         public string kriterijumPretrage;
 
-        // Tabela
-        public NetworkEntitiesViewModel()
-        {
-            Tipovi = new ObservableCollection<string>();
-            Tipovi.Add("RTU");
-            Tipovi.Add("Termosprega");
-
-            if (Reaktori == null)
-            {
-                Reaktori = new ObservableCollection<Reaktor>();
-            }
-
-            // Komande
-            AddCommand = new MyICommand(OnAdd);
-            DeleteCommand = new MyICommand(OnDelete, CanDelete);
-            PretragaCommand = new MyICommand(onPretraga, CanFilter);
-            RemovePretragaCommand = new MyICommand(RemovePretraga);
-        }
-
-        public ObservableCollection<string> Tipovi { get; set; }
-        public static ObservableCollection<Reaktor> SviReaktori { get; set; }
-        public static ObservableCollection<Reaktor> Reaktori { get; set; }
-
-        public MyICommand AddCommand { get; set; }
-        public MyICommand DeleteCommand { get; set; }
-        public MyICommand PretragaCommand { get; set; }
-        public MyICommand RemovePretragaCommand { get; set; }
-
-
-        #region PROPERTIJI - NOVI REAKTOR
-        // Za novi reaktor
         public int IdTb
         {
             get { return idTb; }
@@ -88,7 +34,6 @@ namespace NetworkService.ViewModel
             }
         }
 
-        // Za novi reaktor
         public string NameTb
         {
             get { return nameTb; }
@@ -103,7 +48,6 @@ namespace NetworkService.ViewModel
             }
         }
 
-        // Za novi reaktor
         public string TypeCb
         {
             get { return typeCb; }
@@ -114,51 +58,6 @@ namespace NetworkService.ViewModel
                 {
                     typeCb = value;
                     OnPropertyChanged("TypeCb");
-                }
-            }
-        }
-
-        public Reaktor SelectedDevice
-        {
-            get { return selectedDevice; }
-
-            set
-            {
-                if (selectedDevice != value)
-                {
-                    selectedDevice = value;
-                    DeleteCommand.RaiseCanExecuteChanged();
-
-                }
-            }
-        }
-        #endregion
-
-        #region PROPERTIJI - PRETRAGA
-        public bool PretragaNaziv
-        {
-            get { return pretragaNaziv; }
-
-            set
-            {
-                if (pretragaNaziv != value)
-                {
-                    pretragaNaziv = value;
-                    OnPropertyChanged("PretragaNaziv");
-                }
-            }
-        }
-
-        public bool PretragaTip
-        {
-            get { return pretragaTip; }
-
-            set
-            {
-                if (pretragaTip != value)
-                {
-                    pretragaTip = value;
-                    OnPropertyChanged("PretragaTip");
                 }
             }
         }
@@ -176,31 +75,210 @@ namespace NetworkService.ViewModel
                 }
             }
         }
+
+        public bool PretragaPoTipu
+        {
+            get { return pretragaPoTipu; }
+
+            set
+            {
+                if (pretragaPoTipu != value)
+                {
+                    pretragaPoTipu = value;
+                    OnPropertyChanged("PretragaPoTipu");
+                }
+            }
+        }
+
+        public bool PretragaPoNazivu
+        {
+            get { return pretragaPoNazivu; }
+
+            set
+            {
+                if (pretragaPoNazivu != value)
+                {
+                    pretragaPoNazivu = value;
+                    OnPropertyChanged("PretragaPoNazivu");
+                }
+            }
+        }
         #endregion
 
-        #region AKCIJE - DODAVANJE, BRISANJE
+        #region SELEKTOVANI REAKTOR
+        // SELEKTOVANI
+        private Reaktor selectedDevice;
+        public Reaktor SelectedDevice
+        {
+            get { return selectedDevice; }
+
+            set
+            {
+                if (selectedDevice != value)
+                {
+                    selectedDevice = value;
+                    DeleteCommand.RaiseCanExecuteChanged();
+
+                }
+            }
+        }
+
+        // TRENUTNI
+        public Reaktor currentDevice = new Reaktor();
+        public Reaktor CurrentDevice
+        {
+            get { return currentDevice; }
+            set
+            {
+                if (currentDevice != value)
+                {
+                    currentDevice = value;
+                    OnPropertyChanged("CurrentDevice");
+                }
+            }
+        }
+
+        // TIP TRENUTNOG
+        public Tip currentDeviceType = new Tip();
+        public Tip CurrentDeviceType
+        {
+            get { return currentDeviceType; }
+            set
+            {
+                if (currentDeviceType != value)
+                {
+                    currentDeviceType = value;
+                    OnPropertyChanged("CurrentDeviceType");
+                }
+            }
+        }
+        #endregion
+
+        #region KOLEKCIJE I KOMANDE
+        public ObservableCollection<string> Tipovi { get; set; }
+        public static ObservableCollection<Reaktor> SviReaktori { get; set; }
+        public static ObservableCollection<Reaktor> ReaktoriPretraga { get; set; }
+
+        public MyICommand AddCommand { get; set; }
+        public MyICommand DeleteCommand { get; set; }
+        public MyICommand PretragaCommand { get; set; }
+        public MyICommand RemovePretragaCommand { get; set; }
+        #endregion
+
+        #region KONSTRUKTOR
+        public NetworkEntitiesViewModel()
+        {
+            Tipovi = new ObservableCollection<string>();
+            Tipovi.Add("RTU");
+            Tipovi.Add("Termosprega");
+
+            if (ReaktoriPretraga == null)
+            {
+                ReaktoriPretraga = new ObservableCollection<Reaktor>();
+            }
+            if (SviReaktori == null)
+            {
+                SviReaktori = new ObservableCollection<Reaktor>();
+            }
+
+            // Komande
+            AddCommand = new MyICommand(OnAdd);
+            DeleteCommand = new MyICommand(OnDelete, CanDelete);
+            PretragaCommand = new MyICommand(OnPretraga, CanPretraga);
+            RemovePretragaCommand = new MyICommand(RemovePretraga);
+        }
+        #endregion
+
+        #region PRETRAGA
+        public void PretragaTip()
+        {
+            string pvalue = KriterijumPretrage.Trim().ToLower();
+            ReaktoriPretraga.Clear();
+
+            foreach (Reaktor reaktor in SviReaktori)
+            {
+                if (reaktor.Tip.NazivTipa.ToLower().Contains(pvalue))
+                {
+                    ReaktoriPretraga.Add(reaktor);
+                }
+            }
+        }
+
+        public void PretragaNaziv()
+        {
+            string pvalue = KriterijumPretrage.Trim().ToLower();
+            ReaktoriPretraga.Clear();
+
+            foreach (Reaktor reaktor in SviReaktori)
+            {
+                if (reaktor.Ime.ToLower().Contains(pvalue))
+                {
+                    ReaktoriPretraga.Add(reaktor);
+                }
+            }
+        }
+        #endregion
+
+        #region AKCIJE - MODIFIKACIJA
         private void OnAdd()
         {
-            Reaktor novi = new Reaktor 
-            { 
-                Id = IdTb, 
-                Ime = NameTb, 
-                Tip = new Tip { Naziv = TypeCb, Slika = "" }, 
-                Vrednost = 0 
-            };
-            AddReaktor(novi);
+            int parsedId;
+            bool canParse = int.TryParse(CurrentDevice.TextId, out parsedId);
+            bool idAlreadyExists = false;
+
+            if (canParse)
+            {
+                foreach (Reaktor r in SviReaktori)
+                {
+                    if (r.Id == parsedId)
+                    {
+                        idAlreadyExists = true;
+                        break;
+                    }
+                }
+            }
+
+            CurrentDevice.IdExists = idAlreadyExists;
+
+            CurrentDevice.Validate();
+            CurrentDeviceType.Validate();
+
+            if (CurrentDevice.IsValid && CurrentDeviceType.IsValid)
+            {
+                Tip type = null;
+                if (CurrentDeviceType.NazivTipa.Equals("RTD"))
+                {
+                    type = new Tip() { NazivTipa = CurrentDeviceType.NazivTipa, SlikaTipa = "Assets/rtd.png" };
+                }
+                else
+                {
+                    type = new Tip() { NazivTipa = CurrentDeviceType.NazivTipa, SlikaTipa = "Assets/sprega.png" };
+                }
+                Reaktor reaktor = new Reaktor { Id = Int32.Parse(CurrentDevice.TextId), Ime = CurrentDevice.Ime, Tip = type, Vrednost = 0 };
+                AddReaktor(reaktor);
+            }
         }
 
         private void AddReaktor(Reaktor novi)
         {
             SviReaktori.Add(novi);
-            Reaktori = SviReaktori;
+
+            ReaktoriPretraga.Clear();
+            foreach (Reaktor r in SviReaktori)
+            {
+                ReaktoriPretraga.Add(r);
+            }
         }
 
         private void OnDelete()
         {
             SviReaktori.Remove(SelectedDevice);
-            Reaktori = SviReaktori;
+            
+            ReaktoriPretraga.Clear();
+            foreach (Reaktor r in SviReaktori)
+            {
+                ReaktoriPretraga.Add(r);
+            }
         }
 
         private bool CanDelete()
@@ -210,68 +288,33 @@ namespace NetworkService.ViewModel
         #endregion
 
         #region AKCIJE - PRETRAGA
-        // PRETRAGA - NAZIV I TIP
-        private void onPretraga()
+        private void OnPretraga()
         {
-            switch (TipPretrage())
-            {
-                // TODO tip
-                case "TipEntiteta":
-                    {
-                        ReaktoriPretraga = Reaktori.Where(r => r.Tip.Naziv.Contains(KriterijumPretrage)).ToList();
-                        Reaktori.Clear();
+            ReaktoriPretraga.Clear();
 
-                        foreach (Reaktor r in ReaktoriPretraga)
-                        {
-                            Reaktori.Add(r);
-                        }
-
-                        break;
-                    }
-                    
-                // TODO Naziv
-                case "NazivEntiteta":
-                    {
-                        ReaktoriPretraga = Reaktori.Where(r => r.Ime.Contains(KriterijumPretrage)).ToList();
-                        Reaktori.Clear();
-
-                        foreach (Reaktor r in ReaktoriPretraga)
-                        {
-                            Reaktori.Add(r);
-                        }
-
-                        break;
-                    }
-
-                // TipPretrage == "Svi"
-                default:
-                    break;
-            }
+            if (PretragaPoTipu)
+                PretragaTip();
+            else 
+                PretragaNaziv();
         }
 
-        private bool CanFilter()
+        private bool CanPretraga()
         {
-            return (ReaktoriTemp == null || ReaktoriTemp.Count() == 0);
-        }
-
-        private string TipPretrage()
-        {
-            string mode = "";
-            
-            // TODO
-
-            return mode;
+            // TODO: fix
+            //return ((PretragaPoNazivu || PretragaPoTipu) && KriterijumPretrage.Trim().Length > 0 && SviReaktori.Count() > 0);
+            return true;           
         }
 
         private void RemovePretraga()
         {
-            Reaktori = SviReaktori;
+            ReaktoriPretraga.Clear();
 
-            if (ReaktoriTemp != null)
+            foreach (Reaktor r in SviReaktori)
             {
-                ReaktoriTemp.Clear();
-                PretragaCommand.RaiseCanExecuteChanged();
+                ReaktoriPretraga.Add(r);
             }
+
+            PretragaCommand.RaiseCanExecuteChanged();   
         }
         #endregion
     }

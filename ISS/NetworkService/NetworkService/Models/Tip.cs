@@ -10,49 +10,40 @@ namespace NetworkService.Models
 {
     public class Tip : ValidationBase   
     {
-        private string naziv;
-        private string slika = "Assets/empty.png";
+        private string nazivTipa;
+        private string slikaTipa;
 
-        public string Naziv
+        public string NazivTipa
         {
-            get { return naziv; }
+            get { return nazivTipa; }
             set
             {
-                if (naziv != value)
+                if (nazivTipa != value)
                 {
-                    naziv = value;
-                    Slika = Helpers.ComboBoxItems.entityTypes[value];
-                    OnPropertyChanged("Naziv");      // TODO Name ili Naziv?
+                    nazivTipa = value;
+                    OnPropertyChanged("NazivTipa");
                 }
             }
         }
 
-        public string Slika
+        public string SlikaTipa
         {
-            get { return slika; }
+            get { return slikaTipa; }
             set
             {
-                if (slika != value)
+                if (slikaTipa != value)
                 {
-                    slika = value;
-                    OnPropertyChanged("Slika");      // TODO ImgSrc ili Slika?
+                    slikaTipa = value;
+                    OnPropertyChanged("SlikaTipa");
                 }
             }
-        }
-
-        public Tip() { }
-
-        public Tip(Tip t)
-        {
-            Naziv = t.naziv;
-            Slika = t.slika;
         }
 
         protected override void ValidateSelf()
         {
-            if (this.Naziv == null)
+            if (this.NazivTipa == null)
             {
-                this.ValidationErrors["Naziv"] = "Type must be selected.";
+                this.ValidationErrors["NazivTipa"] = "Type must be selected.";
             }
         }
     }

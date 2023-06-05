@@ -112,7 +112,7 @@ namespace NetworkService.ViewModel
                         {
                             // Response
                             //Byte[] data = System.Text.Encoding.ASCII.GetBytes(count.ToString());
-                            Byte[] data = System.Text.Encoding.ASCII.GetBytes(NetworkEntitiesViewModel.Reaktori.Count().ToString());
+                            Byte[] data = System.Text.Encoding.ASCII.GetBytes(NetworkEntitiesViewModel.ReaktoriPretraga.Count().ToString());
                             stream.Write(data, 0, data.Length);
                         }
                         else
@@ -126,7 +126,7 @@ namespace NetworkService.ViewModel
                             string incomingId = incomming.Substring(incomming.IndexOf('_') + 1, 1);
                             double value = double.Parse(incomming.Substring(incomming.IndexOf(':') + 1));
 
-                            foreach (Models.Reaktor d in NetworkEntitiesViewModel.Reaktori)
+                            foreach (Models.Reaktor d in NetworkEntitiesViewModel.ReaktoriPretraga)
                             {
                                 if (Int32.Parse(incomingId) == d.Id)
                                 {

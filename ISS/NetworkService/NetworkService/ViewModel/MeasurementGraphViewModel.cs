@@ -16,7 +16,7 @@ namespace NetworkService.ViewModel
 
         public MeasurementGraphViewModel()
         {
-            GraphMeasuringDevices = NetworkEntitiesViewModel.Reaktori;
+            GraphMeasuringDevices = NetworkEntitiesViewModel.ReaktoriPretraga;
             Dates = new ObservableCollection<TimeSpan>();
             Values = new ObservableCollection<double>();
 

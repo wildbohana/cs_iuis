@@ -11,7 +11,7 @@ namespace NetworkService.Helpers
     {
         public ValidationErrors ValidationErrors { get; set; }
         public bool IsValid { get; private set; }
-        public bool DoesIdAlreadyExist { get; set; }
+        public bool IdExists { get; set; }
 
         protected ValidationBase()
         {

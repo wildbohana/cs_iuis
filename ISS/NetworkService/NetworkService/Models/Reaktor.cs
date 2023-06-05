@@ -10,16 +10,9 @@ using static NetworkService.Models.Reaktor;
 
 namespace NetworkService.Models
 {
-    //public class DataBase
-    //{
-    //    public static ObservableCollection<Reaktor> Reaktori { get; set; } = new ObservableCollection<Reaktor>();
-    //    public static Dictionary<string, Reaktor> CanvasObjekti { get; set; } = new Dictionary<string, Reaktor>();
-    //}
-
     public class Reaktor : ValidationBase
     {
         private string textId;
-
         private int id;
         private string ime;
         private Tip tip;
@@ -70,11 +63,10 @@ namespace NetworkService.Models
             set
             {
                 if (tip != value)
-                {
-
+                { 
                     tip = value;
-                    tip.Naziv = value.Naziv;
-                    tip.Slika = value.Slika;
+                    tip.NazivTipa = value.NazivTipa;
+                    tip.NazivTipa = value.NazivTipa;
                     OnPropertyChanged("Tip");
                 }
             }
@@ -94,67 +86,40 @@ namespace NetworkService.Models
         }
         #endregion
 
-        #region OSTALO
-        public bool IsValueValidForType()
-        {
-            bool isValid = true;
-            if (Vrednost > 350 || Vrednost < 250)
-                isValid = false;
-
-            return isValid;
-        }
-
-        public bool IsRTD()
-        {
-            if (tip.Naziv == "RTD")
-                return true;
-            return false;
-        }
-
-        protected override void ValidateSelf()
-        {
-            int tempId;
-            bool parsingSuccess = int.TryParse(this.textId, out tempId);
-
-            if (this.DoesIdAlreadyExist)
-            {
-                this.ValidationErrors["Id"] = "Id already exists.";
-            }
-
-            if (!parsingSuccess)
-            {
-                this.ValidationErrors["Id"] = "Id must be an integer.";
-            }
-            else if (tempId < 0)
-            {
-                this.ValidationErrors["Id"] = "Id can't be negative.";
-            }
-
-            if (string.IsNullOrWhiteSpace(this.textId))
-            {
-                this.ValidationErrors["Id"] = "Id is required.";
-            }
-
-            if (string.IsNullOrWhiteSpace(this.Ime))
-            {
-                this.ValidationErrors["Ime"] = "Name is required.";
-            }
-        }
-        #endregion
-
-        public Reaktor() { }
-        
-        public Reaktor(Reaktor s)
-        {
-            Id = s.Id;
-            Ime = s.Ime;
-            Tip = s.tip;
-            Vrednost = s.Vrednost;
-        }
-
+        #region ISPIS
         public override string ToString()
         {
             return $"{Id}. {Ime}";
         }
+        #endregion
+
+        #region VALIDACIJA
+        protected override void ValidateSelf()
+        {
+            int parsedId;
+            bool canParse = int.TryParse(this.textId, out parsedId);
+
+            if (!canParse)
+            {
+                this.ValidationErrors["Id"] = "Id must be an number.";
+            }
+            else if (parsedId < 0)
+            {
+                this.ValidationErrors["Id"] = "Id must be a positive number.";
+            }
+            if (this.IdExists)
+            {
+                this.ValidationErrors["Id"] = "Id already exists.";
+            }
+            if (string.IsNullOrEmpty(this.textId))
+            {
+                this.ValidationErrors["Id"] = "Id is requiered.";
+            }
+            if (string.IsNullOrEmpty(this.Ime))
+            {
+                this.ValidationErrors["Name"] = "Name is requiered.";
+            }
+        }
+        #endregion
     }
 }

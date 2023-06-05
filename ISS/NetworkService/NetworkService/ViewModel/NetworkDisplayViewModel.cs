@@ -102,13 +102,13 @@ namespace NetworkService.ViewModel
                 {
                     BitmapImage logo = new BitmapImage();
                     logo.BeginInit();
-                    logo.UriSource = new Uri(draggedItem.Tip.Slika, UriKind.RelativeOrAbsolute);
+                    logo.UriSource = new Uri(draggedItem.Tip.SlikaTipa, UriKind.RelativeOrAbsolute);
                     logo.EndInit();
 
                     CanvasCollection[index].Background = new ImageBrush(logo);
                     CanvasCollection[index].Resources.Add("taken", true);
                     CanvasCollection[index].Resources.Add("data", draggedItem);
-                    BorderBrushCollection[index] = (draggedItem.IsValueValidForType()) ? Brushes.GreenYellow : Brushes.Crimson;
+                    //BorderBrushCollection[index] = (draggedItem.IsValueValidForType()) ? Brushes.GreenYellow : Brushes.Crimson;
 
                     // drag from another
                     if (draggingSourceIndex != -1)
@@ -401,7 +401,7 @@ namespace NetworkService.ViewModel
 
             if (canvasIndex != -1)
             {
-                if (entity.IsValueValidForType())
+                if (false) //entity.IsValueValidForType())
                 {
                     BorderBrushCollection[canvasIndex] = Brushes.GreenYellow;
                 }
