@@ -12,11 +12,26 @@ namespace NetworkService.ViewModel
 {
     public class MeasurementGraphViewModel : BindableBase
     {
-        public Reaktor selectedDevice;
+        #region IZABRANI REAKTOR
+        private Reaktor selectedDevice;
+        public Reaktor SelectedDevice
+        {
+            get { return selectedDevice; }
+            set
+            {
+                if (selectedDevice != value)
+                {
+                    selectedDevice = value;
+                    OnPropertyChanged("SelectedDevice");
+                }
+            }
+        }
+        #endregion
 
+        #region KONSTRUKTOR
         public MeasurementGraphViewModel()
         {
-            GraphMeasuringDevices = NetworkEntitiesViewModel.ReaktoriPretraga;
+            GraphMeasuringDevices = NetworkEntitiesViewModel.SviReaktori;
             Dates = new ObservableCollection<TimeSpan>();
             Values = new ObservableCollection<double>();
 
@@ -31,27 +46,14 @@ namespace NetworkService.ViewModel
 
             ShowGraphCommand = new MyICommand(ShowGraph);
         }
+        #endregion
 
         #region PROPERTIJI
         public ObservableCollection<TimeSpan> Dates { get; set; }
         public ObservableCollection<double> Values { get; set; }
         public ObservableCollection<string> WarningVisability { get; set; }
-
         public ObservableCollection<Reaktor> GraphMeasuringDevices { get; set; }
-        public MyICommand ShowGraphCommand { get; set; }
-
-        public Reaktor SelectedDevice
-        {
-            get { return selectedDevice; }
-            set
-            {
-                if (selectedDevice != value)
-                {
-                    selectedDevice = value;
-                    OnPropertyChanged("SelectedDevice");
-                }
-            }
-        }
+        public MyICommand ShowGraphCommand { get; set; }  
         #endregion
 
         #region METODE
@@ -88,7 +90,7 @@ namespace NetworkService.ViewModel
                             j++;
                             TimeSpan date = DateTime.Parse(split[0]).TimeOfDay;
                             Dates.Add(date);
-                            double value = double.Parse(split[2]) * 100;
+                            double value = double.Parse(split[2]);
                             Values.Add(value);
                         }
                     }
@@ -99,7 +101,7 @@ namespace NetworkService.ViewModel
             {
                 if (Values[i] > 350 || Values[i] < 250)
                 {
-                    Values[i] = 0;
+                    //Values[i] = 0;
                     WarningVisability[i] = "Visible";
                 }
             }

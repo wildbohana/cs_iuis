@@ -43,22 +43,27 @@
         </Grid.RowDefinitions>
         
         <!-- Navigacija -->
-        <Border Grid.Row="0" Margin="250 10" Background="White" CornerRadius="20">
+        <Border Grid.Row="0" Margin="150 10" Background="White" CornerRadius="20">
             <Grid TextBlock.FontSize="10" TextBlock.FontFamily="Roboto" TextBlock.TextAlignment="Center">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- TODO IZMENI DA DOBRO ISPIŠE -->
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding CurrentViewModel}" />
+                <!-- TODO undo-->
+                <Button Grid.Column="5" Background="Transparent" BorderBrush="Transparent" Command="{Binding UndoCommand}" HorizontalAlignment="Right">
+                    <StackPanel>
+                        <Image Source="Assets/empty.png" Stretch="Uniform" Width="36" Margin="5"/>
+                        <TextBlock Text="OPOZOVI"/>
+                    </StackPanel>
+                </Button>
 
                 <!-- Početna stranica -->
-                <Button  Grid.Column="1" Background="Transparent" BorderBrush="Transparent" Command="{Binding NavCommand}" CommandParameter="home">
+                <Button Grid.Column="1" Background="Transparent" BorderBrush="Transparent" Command="{Binding NavCommand}" CommandParameter="home">
                     <StackPanel>
                         <Image Source="Assets/home.png" Stretch="Uniform" Width="26" Margin="5"/>
                         <TextBlock Text="POČETNA"/>

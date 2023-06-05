@@ -17,8 +17,8 @@
         <!-- Leva strana -->
         <Border Grid.Column="0" CornerRadius="20" BorderThickness="1" BorderBrush="Black" Background="White" Margin="10 10 0 10" VerticalAlignment="Top" Height="500">
             <StackPanel>
-                <TextBlock  Text="Izaberi entitet:" FontSize="20" Padding="10"/>
-                
+                <TextBlock Text="Izaberi entitet:" FontSize="20" Padding="10"/>
+
                 <ListView Margin="10 10 10 35" ItemsSource="{Binding GraphMeasuringDevices}" SelectedItem="{Binding SelectedDevice}"></ListView>
                 <Button VerticalAlignment="Bottom" Width="100" HorizontalAlignment="Center" Margin="10" Command="{Binding ShowGraphCommand}">Prikaži graf</Button>
             </StackPanel>

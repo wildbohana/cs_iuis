@@ -252,6 +252,7 @@ namespace NetworkService.ViewModel
                 }
                 else
                 {
+                    // System.Uri("/Assets/sprega.png", UriKind.Relative)
                     type = new Tip() { NazivTipa = CurrentDeviceType.NazivTipa, SlikaTipa = "Assets/sprega.png" };
                 }
                 Reaktor reaktor = new Reaktor { Id = Int32.Parse(CurrentDevice.TextId), Ime = CurrentDevice.Ime, Tip = type, Vrednost = 0 };

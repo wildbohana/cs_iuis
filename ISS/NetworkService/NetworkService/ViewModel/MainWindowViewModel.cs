@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 
 namespace NetworkService.ViewModel
 {
+    public enum Actions { NO_ACTION, ADD, DELETE, WINDOW_CHANGED };
+
     public class MainWindowViewModel : BindableBase
     {
         #region NAVIGACIJA
@@ -48,11 +50,10 @@ namespace NetworkService.ViewModel
             graphsViewModel = new MeasurementGraphViewModel();
             displayViewModel = new NetworkDisplayViewModel();
 
-            CurrentViewModel = homeViewModel;
+            // Undo action
+            //undoAction = new MyICommand(OnUndoAction);
 
-            // TODO: trebace ti kasnije kada iz EntitiesViewModel saljes nove entitete kako bi dodala u ovu listu gore TvojaKlasa
-            // Messenger.Default.Register<Entitet>(this, DodajUListu);
-            // Messenger.Default.Register<int>(this, UkloniIzListe);
+            CurrentViewModel = homeViewModel;
         }
 
         #region VIEWS
@@ -112,7 +113,7 @@ namespace NetworkService.ViewModel
                         {
                             // Response
                             //Byte[] data = System.Text.Encoding.ASCII.GetBytes(count.ToString());
-                            Byte[] data = System.Text.Encoding.ASCII.GetBytes(NetworkEntitiesViewModel.ReaktoriPretraga.Count().ToString());
+                            Byte[] data = System.Text.Encoding.ASCII.GetBytes(NetworkEntitiesViewModel.SviReaktori.Count().ToString());
                             stream.Write(data, 0, data.Length);
                         }
                         else
@@ -124,18 +125,20 @@ namespace NetworkService.ViewModel
                             // Obraditi poruku kako bi se dobile informacije o izmeni
                             // Azuriranje potrebnih stvari u aplikaciji
                             string incomingId = incomming.Substring(incomming.IndexOf('_') + 1, 1);
+                            int rbr = int.Parse(incomingId);
+                            int entityId = NetworkEntitiesViewModel.SviReaktori[rbr].Id;
                             double value = double.Parse(incomming.Substring(incomming.IndexOf(':') + 1));
 
-                            foreach (Models.Reaktor d in NetworkEntitiesViewModel.ReaktoriPretraga)
+                            foreach (Reaktor r in NetworkEntitiesViewModel.SviReaktori)
                             {
-                                if (Int32.Parse(incomingId) == d.Id)
+                                if (entityId == r.Id)
                                 {
-                                    d.Vrednost = value;
+                                    r.Vrednost = value;
 
                                     using (StreamWriter sr = File.AppendText("../../Log.txt"))
                                     {
                                         DateTime dateTime = DateTime.Now;
-                                        sr.WriteLine($"{dateTime},{d.Id},{value}");
+                                        sr.WriteLine($"{dateTime},{r.Id},{value}");
                                     }
 
                                     break;
@@ -149,6 +152,60 @@ namespace NetworkService.ViewModel
             listeningThread.IsBackground = true;
             listeningThread.Start();
         }
+        #endregion
+
+        // Ovo nije urađeno !!
+        #region UNDO
+        //private MyICommand undoAction;
+        //public MyICommand UndoAction { get; set; }
+
+        //public static Object LastAction { get; set; }
+        //public static Actions LastActionId { get; set; }
+
+        //private void OnUndoAction()
+        //{
+        //    if (LastAction != null && LastActionId != Actions.NO_ACTION)
+        //    {
+        //        if (LastActionId == Actions.ADD)
+        //        {
+        //            entitiesViewModel.UndoAdd((Entity)LastAction);
+        //        }
+        //        if (LastActionId == Actions.DELETE)
+        //        {
+        //            entitiesViewModel.UndoDelete((Entity)LastAction);
+        //        }
+        //        if (LastActionId == Actions.WINDOW_CHANGED)
+        //        {
+        //            CurrentViewModel = (BindableBase)LastAction;
+        //        }
+        //    }
+
+        //    LastAction = null;
+        //    LastActionId = Actions.NO_ACTION;
+        //}
+
+        //private void OnSetMenuEntities()
+        //{
+        //    LastAction = CurrentViewModel;
+        //    LastActionId = Actions.WINDOW_CHANGED;
+        //    CurrentViewModel = entitiesViewModel;
+        //}
+
+        //private void OnSetMenuDisplay()
+        //{
+        //    LastAction = CurrentViewModel;
+        //    LastActionId = Actions.WINDOW_CHANGED;
+        //    CurrentViewModel = displayViewModel;
+        //}
+
+        //private void OnSetMenuGraph()
+        //{
+        //    LastAction = CurrentViewModel;
+        //    LastActionId = Actions.WINDOW_CHANGED;
+
+        //    CurrentViewModel = graphsViewModel;
+        //}
+
         #endregion
     }
 }

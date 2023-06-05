@@ -57,8 +57,8 @@
                 </DataGrid>
             </Border>
 
+            <!-- Unos novog dole -->
             <Border CornerRadius="20" BorderThickness="1" BorderBrush="Black" Background="White" Margin="200 10">
-                <!-- Unos novog dole -->
                 <Grid Margin="100 20">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
@@ -87,12 +87,12 @@
             </Border>
         </StackPanel>
 
-        
-        <StackPanel Grid.Column="2">
-            <Border CornerRadius="20" BorderThickness="1" BorderBrush="Black" Background="White" Margin="0 10 10 0" Height="100">
-                <!--TextBlock>Ovde će biti terminal, i ispod ide undo</TextBlock-->
-            </Border>
-        </StackPanel>
+        <!-- Terminal desno -->
+        <Border Grid.Column="2" CornerRadius="20" BorderThickness="1" BorderBrush="Black" Background="White" Margin="0 10 10 10" Height="200" VerticalAlignment="Top">
+            <StackPanel>
+                <TextBlock Padding="10" Text="Terminal" Foreground="black" />
+            </StackPanel>
+        </Border>
     </Grid>
     
 </UserControl>
