@@ -14,8 +14,6 @@ using System.Threading.Tasks;
 
 namespace NetworkService.ViewModel
 {
-    public enum Actions { NO_ACTION, ADD, DELETE, WINDOW_CHANGED };
-
     public class MainWindowViewModel : BindableBase
     {
         #region NAVIGACIJA
@@ -44,11 +42,11 @@ namespace NetworkService.ViewModel
             graphsViewModel = new MeasurementGraphViewModel();
             displayViewModel = new NetworkDisplayViewModel();
 
-            // Undo action
-            //undoCommand = new MyICommand(OnUndo);
-
             // Početna je home
             CurrentViewModel = homeViewModel;
+
+            // Undo action
+            UndoCommand = new MyICommand(OnUndoNav);
         }
         #endregion
 
@@ -82,38 +80,6 @@ namespace NetworkService.ViewModel
                 case "graphs":
                     CurrentViewModel = graphsViewModel;
                     break;
-            }
-        }
-        #endregion
-
-        #region BRISANJE
-        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.NewItems != null)
-            {
-                foreach (Reaktor newEntity in e.NewItems)
-                {
-                    if (!NetworkDisplayViewModel.NetworkServiceDevices.Contains(newEntity))
-                    {
-                        NetworkDisplayViewModel.NetworkServiceDevices.Add(newEntity);
-                    }
-                }
-            }
-
-            if (e.OldItems != null)
-            {
-                foreach (Reaktor oldEntity in e.OldItems)
-                {
-                    if (NetworkDisplayViewModel.NetworkServiceDevices.Contains(oldEntity))
-                    {
-                        NetworkDisplayViewModel.NetworkServiceDevices.Remove(oldEntity);
-                    }
-                    else
-                    {
-                        int canvasIndex = displayViewModel.GetCanvasIndexForEntityId(oldEntity.Id);
-                        displayViewModel.DeleteEntityFromCanvas(oldEntity);
-                    }
-                }
             }
         }
         #endregion
@@ -218,54 +184,6 @@ namespace NetworkService.ViewModel
                 UndoDestinations.RemoveAt(UndoDestinations.Count - 1);
             }
         }
-
-        //public static Object LastAction { get; set; }
-        //public static Actions LastActionId { get; set; }
-
-        //private void OnUndoAction()
-        //{
-        //    if (LastAction != null && LastActionId != Actions.NO_ACTION)
-        //    {
-        //        if (LastActionId == Actions.ADD)
-        //        {
-        //            entitiesViewModel.UndoAdd((Entity)LastAction);
-        //        }
-        //        if (LastActionId == Actions.DELETE)
-        //        {
-        //            entitiesViewModel.UndoDelete((Entity)LastAction);
-        //        }
-        //        if (LastActionId == Actions.WINDOW_CHANGED)
-        //        {
-        //            CurrentViewModel = (BindableBase)LastAction;
-        //        }
-        //    }
-
-        //    LastAction = null;
-        //    LastActionId = Actions.NO_ACTION;
-        //}
-
-        //private void OnSetMenuEntities()
-        //{
-        //    LastAction = CurrentViewModel;
-        //    LastActionId = Actions.WINDOW_CHANGED;
-        //    CurrentViewModel = entitiesViewModel;
-        //}
-
-        //private void OnSetMenuDisplay()
-        //{
-        //    LastAction = CurrentViewModel;
-        //    LastActionId = Actions.WINDOW_CHANGED;
-        //    CurrentViewModel = displayViewModel;
-        //}
-
-        //private void OnSetMenuGraph()
-        //{
-        //    LastAction = CurrentViewModel;
-        //    LastActionId = Actions.WINDOW_CHANGED;
-
-        //    CurrentViewModel = graphsViewModel;
-        //}
-
         #endregion
     }
 }

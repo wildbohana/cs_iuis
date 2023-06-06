@@ -30,8 +30,8 @@
 
                     <!-- Dva RB (naziv, tip) i TextBox (kriterijum pretrage) -->
                     <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                        <RadioButton HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 0 10 0" Foreground="Gray" Content="Naziv" IsChecked="{Binding PretragaPoNazivu}"></RadioButton>
-                        <RadioButton HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10 0 10 0" Foreground="Gray" Content="Tip" IsChecked="{Binding PretragaPoTipu}"></RadioButton>
+                        <RadioButton HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 0 10 0" Foreground="Gray" Content="Naziv" IsChecked="{Binding PretragaPoNazivu, Mode=TwoWay}"></RadioButton>
+                        <RadioButton HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10 0 10 0" Foreground="Gray" Content="Tip" IsChecked="{Binding PretragaPoTipu, Mode=TwoWay}"></RadioButton>
                     </StackPanel>
 
                     <TextBox Grid.Row="2" Width="140" Height="24" Margin="28,13,40,12" FontSize="16" Text="{Binding KriterijumPretrage}"></TextBox>

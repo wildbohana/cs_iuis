@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using NetworkService.Helpers;
 using NetworkService.Models;
 using NetworkService.Views;
@@ -186,6 +187,10 @@ namespace NetworkService.ViewModel
             DeleteCommand = new MyICommand(OnDelete, CanDelete);
             PretragaCommand = new MyICommand(OnPretraga, CanPretraga);
             RemovePretragaCommand = new MyICommand(RemovePretraga);
+
+            pretragaPoTipu = false;
+            pretragaPoNazivu = false;
+
         }
         #endregion
 
@@ -273,6 +278,11 @@ namespace NetworkService.ViewModel
 
         private void OnDelete()
         {
+            int canvasId = NetworkDisplayViewModel.GetCanvasIndexForEntityId(SelectedDevice.Id);
+            NetworkDisplayViewModel.AddedToGrid.Remove(canvasId);
+            NetworkDisplayViewModel.DeleteEntityFromCanvas(SelectedDevice);
+            NetworkDisplayViewModel.InformacijeOEntitetima[canvasId] = new Reaktor { Ime = "" };
+
             SviReaktori.Remove(SelectedDevice);
             NetworkDisplayViewModel.NetworkServiceDevices.Remove(SelectedDevice);
 
@@ -302,8 +312,7 @@ namespace NetworkService.ViewModel
 
         private bool CanPretraga()
         {
-            //return ((PretragaPoNazivu || PretragaPoTipu) && KriterijumPretrage.Trim().Length > 0 && SviReaktori.Count() > 0);
-            return true;           
+            return (PretragaPoNazivu || PretragaPoTipu);
         }
 
         private void RemovePretraga()

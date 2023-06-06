@@ -86,6 +86,7 @@
                                     </i:Interaction.Triggers>
                                 </ContentControl>
                                 <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="0" Width="20" Height="20" HorizontalAlignment="Center"/>
+                                <TextBlock FontSize="14" Text="{Binding InformacijeOEntitetima[0].Ime}" HorizontalAlignment="Center" />
                             </StackPanel>
                         </Border>
 
@@ -108,6 +109,7 @@
                                     </i:Interaction.Triggers>
                                 </ContentControl>
                                 <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="1" Width="20" Height="20" HorizontalAlignment="Center" />
+                                <TextBlock FontSize="14" Text="{Binding InformacijeOEntitetima[1].Ime}" HorizontalAlignment="Center" />
                             </StackPanel>
                         </Border>
 
@@ -130,6 +132,7 @@
                                     </i:Interaction.Triggers>
                                 </ContentControl>
                                 <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="2" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                <TextBlock FontSize="14" Text="{Binding InformacijeOEntitetima[2].Ime}" HorizontalAlignment="Center" />
                             </StackPanel>
                         </Border>
 
@@ -153,6 +156,7 @@
                                     </i:Interaction.Triggers>
                                 </ContentControl>
                                 <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="3" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                <TextBlock FontSize="14" Text="{Binding InformacijeOEntitetima[3].Ime}" HorizontalAlignment="Center" />
                             </StackPanel>
                         </Border>
 
@@ -175,6 +179,7 @@
                                     </i:Interaction.Triggers>
                                 </ContentControl>
                                 <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="4" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                <TextBlock FontSize="14" Text="{Binding InformacijeOEntitetima[4].Ime}" HorizontalAlignment="Center" />
                             </StackPanel>
                         </Border>
 
@@ -197,6 +202,7 @@
                                     </i:Interaction.Triggers>
                                 </ContentControl>
                                 <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="5" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                <TextBlock FontSize="14" Text="{Binding InformacijeOEntitetima[5].Ime}" HorizontalAlignment="Center" />
                             </StackPanel>
                         </Border>
 
@@ -219,6 +225,7 @@
                                     </i:Interaction.Triggers>
                                 </ContentControl>
                                 <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="6" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                <TextBlock FontSize="14" Text="{Binding InformacijeOEntitetima[6].Ime}" HorizontalAlignment="Center" />
                             </StackPanel>
                         </Border>
 
@@ -241,29 +248,31 @@
                                     </i:Interaction.Triggers>
                                 </ContentControl>
                                 <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="7" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                <TextBlock FontSize="14" Text="{Binding InformacijeOEntitetima[7].Ime}" HorizontalAlignment="Center" />
                             </StackPanel>
                         </Border>
 
                         <Border Grid.Row="2" Grid.Column="0" BorderBrush="{Binding BorderBrushCollection[8]}" BorderThickness="1" Height="200" Width="200">
                             <StackPanel>
                                 <ContentControl Content="{Binding Path=CanvasCollection[8]}" Width="150" Height="150" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="Drop">
-                                        <i:InvokeCommandAction Command="{Binding DropEntityOnCanvas}" CommandParameter="8"/>
-                                    </i:EventTrigger>
-                                    <i:EventTrigger EventName="MouseLeftButtonDown">
-                                        <i:InvokeCommandAction Command="{Binding LeftMouseButtonDownOnCanvas}" CommandParameter="8"/>
-                                    </i:EventTrigger>
-                                    <i:EventTrigger EventName="MouseLeftButtonUp">
-                                        <i:InvokeCommandAction Command="{Binding MouseLeftButtonUp}"/>
-                                    </i:EventTrigger>
-                                    <i:EventTrigger EventName="MouseRightButtonDown">
-                                        <i:InvokeCommandAction Command="{Binding RightMouseButtonDownOnCanvas}" CommandParameter="8"/>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                            </ContentControl>
-                            <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="8" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                        </StackPanel>
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Drop">
+                                            <i:InvokeCommandAction Command="{Binding DropEntityOnCanvas}" CommandParameter="8"/>
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                                            <i:InvokeCommandAction Command="{Binding LeftMouseButtonDownOnCanvas}" CommandParameter="8"/>
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                                            <i:InvokeCommandAction Command="{Binding MouseLeftButtonUp}"/>
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="MouseRightButtonDown">
+                                            <i:InvokeCommandAction Command="{Binding RightMouseButtonDownOnCanvas}" CommandParameter="8"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </ContentControl>
+                                <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="8" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                <TextBlock FontSize="14" Text="{Binding InformacijeOEntitetima[8].Ime}" HorizontalAlignment="Center" />
+                            </StackPanel>
                         </Border>
 
                         <Border Grid.Row="2" Grid.Column="1" BorderBrush="{Binding BorderBrushCollection[9]}" BorderThickness="1" Height="200" Width="200">
@@ -285,6 +294,7 @@
                                     </i:Interaction.Triggers>
                                 </ContentControl>
                                 <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="9" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                <TextBlock FontSize="14" Text="{Binding InformacijeOEntitetima[9].Ime}" HorizontalAlignment="Center" />
                             </StackPanel>
                         </Border>
 
@@ -307,6 +317,7 @@
                                     </i:Interaction.Triggers>
                                 </ContentControl>
                                 <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="10" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                <TextBlock FontSize="14" Text="{Binding InformacijeOEntitetima[10].Ime}" HorizontalAlignment="Center" />
                             </StackPanel>
                         </Border>
 
@@ -329,6 +340,7 @@
                                     </i:Interaction.Triggers>
                                 </ContentControl>
                                 <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="11" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                <TextBlock FontSize="14" Text="{Binding InformacijeOEntitetima[11].Ime}" HorizontalAlignment="Center" />
                             </StackPanel>
                         </Border>
                     </Grid>

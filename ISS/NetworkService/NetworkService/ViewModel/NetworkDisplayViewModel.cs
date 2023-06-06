@@ -47,6 +47,7 @@ namespace NetworkService.ViewModel
         // Lista levo
         public static ObservableCollection<Reaktor> NetworkServiceDevices { get; set; }
         public static Dictionary<int, Reaktor> AddedToGrid { get; set; }
+        public static ObservableCollection<Reaktor> InformacijeOEntitetima { get; set; }
 
         // Centralni kanvas
         public static ObservableCollection<Canvas> CanvasCollection { get; set; }
@@ -69,6 +70,25 @@ namespace NetworkService.ViewModel
             if (AddedToGrid == null)
             {
                 AddedToGrid = new Dictionary<int, Reaktor>();
+            }
+
+            // Joj bože šta je ovo lol
+            if (InformacijeOEntitetima == null)
+            {
+                InformacijeOEntitetima = new ObservableCollection<Reaktor>();
+
+                for (int i = 0; i < 12; i++)
+                {
+                    Reaktor novi = new Reaktor
+                    {
+                        Id = -1,
+                        Ime = "",
+                        Tip = new Tip() { NazivTipa = "", SlikaTipa = "" },
+                        Vrednost = 0
+                    };
+
+                    InformacijeOEntitetima.Add(novi);
+                }
             }
 
             // Elementi koji su u listi (nisu u gridu)
@@ -136,7 +156,9 @@ namespace NetworkService.ViewModel
                     CanvasCollection[index].Resources.Add("taken", true);
                     CanvasCollection[index].Resources.Add("data", draggedItem);
                     BorderBrushCollection[index] = (draggedItem.IsValueValidForType()) ? Brushes.GreenYellow : Brushes.Crimson;
+                    
                     AddedToGrid.Add(index, draggedItem);
+                    InformacijeOEntitetima[index] = AddedToGrid[index];
 
                     // Premeštanje iz jednog u drugi
                     if (draggingSourceIndex != -1)
@@ -182,6 +204,14 @@ namespace NetworkService.ViewModel
                     draggedItem = (Reaktor)(CanvasCollection[index].Resources["data"]);
                     draggingSourceIndex = index;
                     DragDrop.DoDragDrop(CanvasCollection[index], draggedItem, DragDropEffects.Move);
+
+                    InformacijeOEntitetima[index] = new Reaktor()
+                    {
+                        Id = -1,
+                        Ime = "",
+                        Tip = new Tip() { NazivTipa = "", SlikaTipa = "" },
+                        Vrednost = 0
+                    };
                 }
             }
         }
@@ -227,7 +257,15 @@ namespace NetworkService.ViewModel
                 CanvasCollection[index].Resources.Remove("taken");
                 CanvasCollection[index].Resources.Remove("data");
                 BorderBrushCollection[index] = (Brush)(new BrushConverter().ConvertFrom("#282B30"));
+
                 AddedToGrid.Remove(index);
+                InformacijeOEntitetima[index] = new Reaktor()
+                {
+                    Id = -1,
+                    Ime = "",
+                    Tip = new Tip() { NazivTipa = "", SlikaTipa = "" },
+                    Vrednost = 0
+                };
             }
         }
 
@@ -353,7 +391,7 @@ namespace NetworkService.ViewModel
         #endregion
 
         #region METODE
-        public void DeleteEntityFromCanvas(Reaktor entity)
+        public static void DeleteEntityFromCanvas(Reaktor entity)
         {
             int canvasIndex = GetCanvasIndexForEntityId(entity.Id);
 
@@ -368,7 +406,7 @@ namespace NetworkService.ViewModel
             }
         }
 
-        private void DeleteLinesForCanvas(int canvasIndex)
+        private static void DeleteLinesForCanvas(int canvasIndex)
         {
             List<MyLine> linesToDelete = new List<MyLine>();
 
@@ -409,7 +447,7 @@ namespace NetworkService.ViewModel
             return new Point(x, y);
         }
 
-        public int GetCanvasIndexForEntityId(int entityId)
+        public static int GetCanvasIndexForEntityId(int entityId)
         {
             for (int i = 0; i < CanvasCollection.Count; i++)
             {

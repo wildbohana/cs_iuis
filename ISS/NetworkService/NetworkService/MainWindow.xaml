@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:NetworkService"
         xmlns:viewModel="clr-namespace:NetworkService.ViewModel"
         xmlns:views="clr-namespace:NetworkService.Views"
+
         mc:Ignorable="d"
 
         Title="Nadzor reaktora" 
@@ -14,7 +15,6 @@
         Height="900" Width="1500" 
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
-    <!-- Dodaj opciju čuvanja pri zatvaranju sa: Closing="Save" -->
 
     <!-- ViewModeli -->
     <Window.DataContext>
@@ -99,7 +99,7 @@
         <!-- Trenutni pogled -->
         <Grid Grid.Row="1" Grid.Column="0">
             <Grid.Background>
-                <ImageBrush ImageSource="/Assets/bg2.png" Stretch="UniformToFill"/>
+                <ImageBrush ImageSource="/Assets/bg1.png" Stretch="UniformToFill"/>
             </Grid.Background>
         </Grid>
         <ContentControl Grid.Row="1" Grid.Column="0" Content="{Binding CurrentViewModel}" Margin="10"/>

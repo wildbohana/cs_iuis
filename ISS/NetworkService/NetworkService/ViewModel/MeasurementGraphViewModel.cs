@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Input;
 using NetworkService.Helpers;
 using NetworkService.Models;
 
@@ -63,6 +65,7 @@ namespace NetworkService.ViewModel
             };
 
             ShowGraphCommand = new MyICommand(ShowGraph);
+            ShowGraphForFirstCommand = new MyICommand(ShowGraphForFirst);
         }
         #endregion
 
@@ -73,10 +76,21 @@ namespace NetworkService.ViewModel
         public ObservableCollection<string> Fills { get; set; }
         public ObservableCollection<string> WarningVisability { get; set; }
         public ObservableCollection<Reaktor> GraphMeasuringDevices { get; set; }
+
         public MyICommand ShowGraphCommand { get; set; }  
+        public MyICommand ShowGraphForFirstCommand { get; set; }
         #endregion
 
         #region METODE
+        private void ShowGraphForFirst()
+        {
+            if (GraphMeasuringDevices.Count > 0)
+            {
+                SelectedDevice = GraphMeasuringDevices[0];
+                ShowGraph();
+            }
+        }
+
         private void ShowGraph()
         {
             List<string> lines = new List<string>();
