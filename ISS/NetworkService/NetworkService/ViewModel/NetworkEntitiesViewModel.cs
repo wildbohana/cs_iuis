@@ -169,7 +169,7 @@ namespace NetworkService.ViewModel
         public NetworkEntitiesViewModel()
         {
             Tipovi = new ObservableCollection<string>();
-            Tipovi.Add("RTU");
+            Tipovi.Add("RTD");
             Tipovi.Add("Termosprega");
 
             if (ReaktoriPretraga == null)
@@ -248,12 +248,12 @@ namespace NetworkService.ViewModel
                 Tip type = null;
                 if (CurrentDeviceType.NazivTipa.Equals("RTD"))
                 {
-                    type = new Tip() { NazivTipa = CurrentDeviceType.NazivTipa, SlikaTipa = "Assets/rtd.png" };
+                    type = new Tip() { NazivTipa = CurrentDeviceType.NazivTipa, SlikaTipa = "../../Assets/rtd.png" };
                 }
                 else
                 {
                     // System.Uri("/Assets/sprega.png", UriKind.Relative)
-                    type = new Tip() { NazivTipa = CurrentDeviceType.NazivTipa, SlikaTipa = "Assets/sprega.png" };
+                    type = new Tip() { NazivTipa = CurrentDeviceType.NazivTipa, SlikaTipa = "../../Assets/sprega.png" };
                 }
                 Reaktor reaktor = new Reaktor { Id = Int32.Parse(CurrentDevice.TextId), Ime = CurrentDevice.Ime, Tip = type, Vrednost = 0 };
                 AddReaktor(reaktor);
@@ -274,7 +274,8 @@ namespace NetworkService.ViewModel
         private void OnDelete()
         {
             SviReaktori.Remove(SelectedDevice);
-            
+            NetworkDisplayViewModel.NetworkServiceDevices.Remove(SelectedDevice);
+
             ReaktoriPretraga.Clear();
             foreach (Reaktor r in SviReaktori)
             {
@@ -301,7 +302,6 @@ namespace NetworkService.ViewModel
 
         private bool CanPretraga()
         {
-            // TODO: fix
             //return ((PretragaPoNazivu || PretragaPoTipu) && KriterijumPretrage.Trim().Length > 0 && SviReaktori.Count() > 0);
             return true;           
         }

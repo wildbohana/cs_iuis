@@ -120,6 +120,26 @@ namespace NetworkService.Models
                 this.ValidationErrors["Name"] = "Name is requiered.";
             }
         }
+
+        public bool IsValueValidForType()
+        {
+            bool isValid = true;
+
+            if (Vrednost > 350)
+            {
+                isValid = false;
+            }
+            else if (Vrednost < 250)
+            {
+                isValid = false;
+            }
+            else
+            {
+                isValid = true;
+            }
+
+            return isValid;
+        }
         #endregion
     }
 }

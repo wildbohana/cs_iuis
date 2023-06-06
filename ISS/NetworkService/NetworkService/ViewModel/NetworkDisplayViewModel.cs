@@ -16,69 +16,8 @@ namespace NetworkService.ViewModel
 {
     public class NetworkDisplayViewModel : BindableBase
     {
-        // TODO dodaj treeview svih entiteta
-
-        public BindingList<Reaktor> EntitiesInList { get; set; }
-
-        // TODO šta je ovo?
-        //public EntityByExtension listaRtd = new EntityByExtension() { Extension = "RTD" };
-        //public EntityByExtension listaSprega = new EntityByExtension() { Extension = "Sprega" };
-
-        #region POLJA
-        public ObservableCollection<Canvas> CanvasCollection { get; set; }
-        public ObservableCollection<MyLine> LineCollection { get; set; }
-        public ObservableCollection<Brush> BorderBrushCollection { get; set; }
-
+        #region IZABRANI ENTITET
         private Reaktor selectedEntity;
-
-        private Reaktor draggedItem = null;
-        private bool dragging = false;
-        public int draggingSourceIndex = -1;
-
-        public MyICommand<object> DropEntityOnCanvas { get; set; }
-        public MyICommand<object> LeftMouseButtonDownOnCanvas { get; set; }
-        public MyICommand MouseLeftButtonUp { get; set; }
-        public MyICommand<object> SelectionChanged { get; set; }
-        public MyICommand<object> OslobodiCanvas { get; set; }
-        public MyICommand<object> RightMouseButtonDownOnCanvas { get; set; }
-
-        private bool isLineSourceSelected = false;
-        private int sourceCanvasIndex = -1;
-        private int destinationCanvasIndex = -1;
-        private MyLine currentLine = new MyLine();
-        private Point linePoint1 = new Point();
-        private Point linePoint2 = new Point();
-
-        public NetworkDisplayViewModel()
-        {
-            //EntitiesInList = new BindingList<Reaktor>();
-            EntitiesInList = new BindingList<Reaktor>();
-
-            CanvasCollection = new ObservableCollection<Canvas>();
-            for (int i = 0; i < 12; i++)
-            {
-                CanvasCollection.Add(new Canvas()
-                {
-                    Background = (Brush)(new BrushConverter().ConvertFrom("#8B9DC3")),
-                    AllowDrop = true
-                });
-            }
-
-            BorderBrushCollection = new ObservableCollection<Brush>();
-            for (int i = 0; i < 12; i++)
-            {
-                BorderBrushCollection.Add((Brush)(new BrushConverter().ConvertFrom("#282B30")));
-            }
-
-            LineCollection = new ObservableCollection<MyLine>();
-
-            DropEntityOnCanvas = new MyICommand<object>(OnDrop);
-            LeftMouseButtonDownOnCanvas = new MyICommand<object>(OnLeftMouseButtonDown);
-            MouseLeftButtonUp = new MyICommand(OnMouseLeftButtonUp);
-            SelectionChanged = new MyICommand<object>(OnSelectionChanged);
-            OslobodiCanvas = new MyICommand<object>(OnOslobodiCanvas);
-            RightMouseButtonDownOnCanvas = new MyICommand<object>(OnRightMouseButtonDown);
-        }
 
         public Reaktor SelectedEntity
         {
@@ -88,6 +27,94 @@ namespace NetworkService.ViewModel
                 selectedEntity = value;
                 OnPropertyChanged("SelectedEntity");
             }
+        }
+        #endregion
+
+        #region KOLEKCIJE I KOMANDE
+        // Za prevlačenje
+        private Reaktor draggedItem = null;
+        private bool dragging = false;
+        public int draggingSourceIndex = -1;
+
+        // Za linije
+        private bool isLineSourceSelected = false;
+        private int sourceCanvasIndex = -1;
+        private int destinationCanvasIndex = -1;
+        private MyLine currentLine = new MyLine();
+        private Point linePoint1 = new Point();
+        private Point linePoint2 = new Point();
+
+        // Lista levo
+        public static ObservableCollection<Reaktor> NetworkServiceDevices { get; set; }
+        public static Dictionary<int, Reaktor> AddedToGrid { get; set; }
+
+        // Centralni kanvas
+        public static ObservableCollection<Canvas> CanvasCollection { get; set; }
+        public static ObservableCollection<MyLine> LineCollection { get; set; }
+        public static ObservableCollection<Brush> BorderBrushCollection { get; set; }
+
+        // Komande
+        public MyICommand<object> DropEntityOnCanvas { get; set; }
+        public MyICommand<object> LeftMouseButtonDownOnCanvas { get; set; }
+        public MyICommand MouseLeftButtonUp { get; set; }
+        public MyICommand<object> SelectionChanged { get; set; }
+        public MyICommand<object> OslobodiCanvas { get; set; }
+        public MyICommand<object> RightMouseButtonDownOnCanvas { get; set; }
+        #endregion
+
+        #region KONSTRUKTOR
+        public NetworkDisplayViewModel()
+        {
+            // Elementi koji su u gridu dodati
+            if (AddedToGrid == null)
+            {
+                AddedToGrid = new Dictionary<int, Reaktor>();
+            }
+
+            // Elementi koji su u listi (nisu u gridu)
+            NetworkServiceDevices = new ObservableCollection<Reaktor>();
+            foreach (Reaktor r in NetworkEntitiesViewModel.SviReaktori)
+            {
+                if (!AddedToGrid.Values.Contains(r))
+                {
+                    NetworkServiceDevices.Add(r);
+                }
+            }
+
+            // Elementi u gridu (slike)
+            if (CanvasCollection == null)
+            {                
+                CanvasCollection = new ObservableCollection<Canvas>();
+                for (int i = 0; i < 12; i++)
+                {
+                    CanvasCollection.Add(new Canvas()
+                    {
+                        Background = (Brush)(new BrushConverter().ConvertFrom("#8B9DC3")),
+                        AllowDrop = true
+                    });
+                }
+            }            
+
+            if (BorderBrushCollection == null)
+            {
+                BorderBrushCollection = new ObservableCollection<Brush>();
+                for (int i = 0; i < 12; i++)
+                {
+                    BorderBrushCollection.Add((Brush)(new BrushConverter().ConvertFrom("#282B30")));
+                }
+            }
+            
+            if (LineCollection == null)
+            {
+                LineCollection = new ObservableCollection<MyLine>();
+            }
+
+            DropEntityOnCanvas = new MyICommand<object>(OnDrop);
+            LeftMouseButtonDownOnCanvas = new MyICommand<object>(OnLeftMouseButtonDown);
+            MouseLeftButtonUp = new MyICommand(OnMouseLeftButtonUp);
+            SelectionChanged = new MyICommand<object>(OnSelectionChanged);
+            OslobodiCanvas = new MyICommand<object>(OnOslobodiCanvas);
+            RightMouseButtonDownOnCanvas = new MyICommand<object>(OnRightMouseButtonDown);
         }
         #endregion
 
@@ -102,13 +129,14 @@ namespace NetworkService.ViewModel
                 {
                     BitmapImage logo = new BitmapImage();
                     logo.BeginInit();
-                    logo.UriSource = new Uri(draggedItem.Tip.SlikaTipa, UriKind.RelativeOrAbsolute);
+                    logo.UriSource = new Uri(draggedItem.Tip.SlikaTipa, UriKind.Relative);
                     logo.EndInit();
 
                     CanvasCollection[index].Background = new ImageBrush(logo);
                     CanvasCollection[index].Resources.Add("taken", true);
                     CanvasCollection[index].Resources.Add("data", draggedItem);
-                    //BorderBrushCollection[index] = (draggedItem.IsValueValidForType()) ? Brushes.GreenYellow : Brushes.Crimson;
+                    BorderBrushCollection[index] = (draggedItem.IsValueValidForType()) ? Brushes.GreenYellow : Brushes.Crimson;
+                    AddedToGrid.Add(index, draggedItem);
 
                     // drag from another
                     if (draggingSourceIndex != -1)
@@ -134,9 +162,9 @@ namespace NetworkService.ViewModel
                     }
 
                     // drag itself
-                    if (EntitiesInList.Contains(draggedItem))
+                    if (NetworkServiceDevices.Contains(draggedItem))
                     {
-                        EntitiesInList.Remove(draggedItem);
+                        NetworkServiceDevices.Remove(draggedItem);
                     }
                 }
             }
@@ -194,11 +222,12 @@ namespace NetworkService.ViewModel
 
                 DeleteLinesForCanvas(index);
 
-                EntitiesInList.Add((Reaktor)CanvasCollection[index].Resources["data"]);
+                NetworkServiceDevices.Add((Reaktor)CanvasCollection[index].Resources["data"]);
                 CanvasCollection[index].Background = (Brush)(new BrushConverter().ConvertFrom("#8B9DC3"));
                 CanvasCollection[index].Resources.Remove("taken");
                 CanvasCollection[index].Resources.Remove("data");
                 BorderBrushCollection[index] = (Brush)(new BrushConverter().ConvertFrom("#282B30"));
+                AddedToGrid.Remove(index);
             }
         }
 
@@ -362,16 +391,16 @@ namespace NetworkService.ViewModel
         {
             double x = 0, y = 0;
 
-            for (int row = 0; row <= 3; row++)
+            for (int row = 0; row <= 2; row++)
             {
-                for (int col = 0; col <= 2; col++)
+                for (int col = 0; col <= 3; col++)
                 {
-                    int currentIndex = row * 3 + col;
+                    int currentIndex = row * 2 + col;
 
                     if (canvasIndex == currentIndex)
                     {
-                        x = 44 + (col * 88);
-                        y = 44 + (row * 88);
+                        x = 100 + (col * 200);
+                        y = 100 + (row * 200);
 
                         break;
                     }
@@ -401,7 +430,7 @@ namespace NetworkService.ViewModel
 
             if (canvasIndex != -1)
             {
-                if (false) //entity.IsValueValidForType())
+                if (entity.IsValueValidForType())
                 {
                     BorderBrushCollection[canvasIndex] = Brushes.GreenYellow;
                 }

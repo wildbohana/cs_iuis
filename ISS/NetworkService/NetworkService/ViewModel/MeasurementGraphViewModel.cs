@@ -44,6 +44,24 @@ namespace NetworkService.ViewModel
                 "Hidden"
             };
 
+            Strokes = new ObservableCollection<string>()
+            {
+                "Blue",
+                "Blue",
+                "Blue",
+                "Blue",
+                "Blue"
+            };
+
+            Fills = new ObservableCollection<string>()
+            {
+                "Aqua",
+                "Aqua",
+                "Aqua",
+                "Aqua",
+                "Aqua"
+            };
+
             ShowGraphCommand = new MyICommand(ShowGraph);
         }
         #endregion
@@ -51,6 +69,8 @@ namespace NetworkService.ViewModel
         #region PROPERTIJI
         public ObservableCollection<TimeSpan> Dates { get; set; }
         public ObservableCollection<double> Values { get; set; }
+        public ObservableCollection<string> Strokes { get; set; }
+        public ObservableCollection<string> Fills { get; set; }
         public ObservableCollection<string> WarningVisability { get; set; }
         public ObservableCollection<Reaktor> GraphMeasuringDevices { get; set; }
         public MyICommand ShowGraphCommand { get; set; }  
@@ -103,6 +123,8 @@ namespace NetworkService.ViewModel
                 {
                     //Values[i] = 0;
                     WarningVisability[i] = "Visible";
+                    Strokes[i] = "Red";
+                    Fills[i] = "HotPink";
                 }
             }
         }
@@ -114,6 +136,8 @@ namespace NetworkService.ViewModel
                 if (WarningVisability[i].Equals("Visible"))
                 {
                     WarningVisability[i] = "Hidden";
+                    Strokes[i] = "Blue";
+                    Fills[i] = "Aqua";
                 }
             }
         }
