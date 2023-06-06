@@ -93,7 +93,7 @@ namespace NetworkService.ViewModel
                         AllowDrop = true
                     });
                 }
-            }            
+            }         
 
             if (BorderBrushCollection == null)
             {
@@ -138,7 +138,7 @@ namespace NetworkService.ViewModel
                     BorderBrushCollection[index] = (draggedItem.IsValueValidForType()) ? Brushes.GreenYellow : Brushes.Crimson;
                     AddedToGrid.Add(index, draggedItem);
 
-                    // drag from another
+                    // Premeštanje iz jednog u drugi
                     if (draggingSourceIndex != -1)
                     {
                         CanvasCollection[draggingSourceIndex].Background = (Brush)(new BrushConverter().ConvertFrom("#8B9DC3"));
@@ -148,7 +148,7 @@ namespace NetworkService.ViewModel
 
                         UpdateLinesForCanvas(draggingSourceIndex, index);
 
-                        // break line if moved
+                        // Prekid linije ako se pomeri
                         if (sourceCanvasIndex != -1)
                         {
                             isLineSourceSelected = false;
@@ -161,7 +161,7 @@ namespace NetworkService.ViewModel
                         draggingSourceIndex = -1;
                     }
 
-                    // drag itself
+                    // Briše sam sebe iz liste levo
                     if (NetworkServiceDevices.Contains(draggedItem))
                     {
                         NetworkServiceDevices.Remove(draggedItem);
@@ -210,7 +210,7 @@ namespace NetworkService.ViewModel
 
             if (CanvasCollection[index].Resources["taken"] != null)
             {
-                // break line if remove
+                // Prekid linija kada se izbriše
                 if (sourceCanvasIndex != -1)
                 {
                     isLineSourceSelected = false;
@@ -386,7 +386,7 @@ namespace NetworkService.ViewModel
             }
         }
 
-        // Central point for canvas
+        // Centralna tačka za kanvas
         private Point GetPointForCanvasIndex(int canvasIndex)
         {
             double x = 0, y = 0;
@@ -399,8 +399,8 @@ namespace NetworkService.ViewModel
 
                     if (canvasIndex == currentIndex)
                     {
-                        x = 100 + (col * 200);
-                        y = 100 + (row * 200);
+                        x = 100 + (col * 150);
+                        y = 100 + (row * 150);
 
                         break;
                     }

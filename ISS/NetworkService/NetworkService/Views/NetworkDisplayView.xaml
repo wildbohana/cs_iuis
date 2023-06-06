@@ -24,7 +24,7 @@
             <StackPanel Grid.Column="0">
                 <TextBlock Text="Izaberi entitet: " FontSize="20" Padding="10" HorizontalAlignment="Center" />
                 
-                <ListView x:Name="ListView" FontWeight="Bold" ItemsSource="{Binding NetworkServiceDevices}" SelectedItem="{Binding SelectedEntity}">
+                <ListView x:Name="ListView" FontSize="15" ItemsSource="{Binding NetworkServiceDevices}" SelectedItem="{Binding SelectedEntity}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
                             <i:InvokeCommandAction Command="{Binding SelectionChanged}" CommandParameter="{Binding ElementName=ListView}"/>
@@ -40,6 +40,20 @@
         <Border Grid.Column="1" CornerRadius="20" BorderBrush="Black" BorderThickness="1" Background="White" Margin="10">
             <StackPanel>
                 <Canvas Height="750" Width="900" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+                    <!-- Linije -->
+                    <ItemsControl ItemsSource="{Binding LineCollection}" Width="860" Height="720">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Canvas />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Line X1="{Binding X1}" Y1="{Binding Y1}" X2="{Binding X2}" Y2="{Binding Y2}" Stroke="Black" StrokeThickness="3" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    
                     <Grid Height="720" Width="860" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
@@ -71,7 +85,7 @@
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </ContentControl>
-                                <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="0" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                                <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="0" Width="20" Height="20" HorizontalAlignment="Center"/>
                             </StackPanel>
                         </Border>
 
@@ -93,7 +107,7 @@
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </ContentControl>
-                                <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="1" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                                <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="1" Width="20" Height="20" HorizontalAlignment="Center" />
                             </StackPanel>
                         </Border>
 
@@ -115,7 +129,7 @@
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </ContentControl>
-                                <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="2" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                                <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="2" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                             </StackPanel>
                         </Border>
 
@@ -138,7 +152,7 @@
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </ContentControl>
-                                <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="3" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                                <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="3" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                             </StackPanel>
                         </Border>
 
@@ -160,7 +174,7 @@
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </ContentControl>
-                                <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="4" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                                <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="4" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                             </StackPanel>
                         </Border>
 
@@ -182,7 +196,7 @@
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </ContentControl>
-                                <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="5" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                                <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="5" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                             </StackPanel>
                         </Border>
 
@@ -204,7 +218,7 @@
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </ContentControl>
-                                <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="6" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                                <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="6" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                             </StackPanel>
                         </Border>
 
@@ -226,7 +240,7 @@
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </ContentControl>
-                                <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="7" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                                <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="7" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                             </StackPanel>
                         </Border>
 
@@ -248,7 +262,7 @@
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </ContentControl>
-                            <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="8" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                            <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="8" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                         </StackPanel>
                         </Border>
 
@@ -270,7 +284,7 @@
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </ContentControl>
-                                <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="9" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                                <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="9" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                             </StackPanel>
                         </Border>
 
@@ -292,7 +306,7 @@
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </ContentControl>
-                                <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="10" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                                <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="10" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                             </StackPanel>
                         </Border>
 
@@ -314,23 +328,9 @@
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </ContentControl>
-                                <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="11" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                                <Button Content="X" Command="{Binding OslobodiCanvas}" CommandParameter="11" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                             </StackPanel>
                         </Border>
-
-                        <!-- Linije -->
-                        <ItemsControl ItemsSource="{Binding LineCollection}">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <Canvas Width="850" Height="700"/>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Line X1="{Binding X1}" Y1="{Binding Y1}" X2="{Binding X2}" Y2="{Binding Y2}" Stroke="Black" StrokeThickness="3" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
                     </Grid>
                 </Canvas>
             </StackPanel>
@@ -338,7 +338,11 @@
 
         <Border Grid.Column="2" CornerRadius="20" BorderThickness="1" BorderBrush="Black" Background="White" Margin="0 10 10 10" Height="200" VerticalAlignment="Top">
             <StackPanel>
-                <TextBlock Padding="10" Text="Terminal" Foreground="black" />
+                <TextBlock Padding="10 10 0 0" Text="Moguće komande:" FontSize="14" Foreground="black" />
+                <TextBlock Padding="10 0 0 0" Text="promenipogled [0,1,2,3]" FontSize="12" Foreground="black" />
+                <TextBlock Padding="10 0 0 10" Text="opozovi" FontSize="12" Foreground="black" />
+
+                <TextBox x:Name="KomandaTerminala"></TextBox>
             </StackPanel>
         </Border>
     </Grid>

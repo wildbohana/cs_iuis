@@ -79,7 +79,11 @@
         <!-- Desna strana -->
         <Border Grid.Column="2" CornerRadius="20" BorderThickness="1" BorderBrush="Black" Background="White" Margin="0 10 10 10" Height="200" VerticalAlignment="Top">
             <StackPanel>
-                <TextBlock Padding="10" Text="Terminal" Foreground="black" />
+                <TextBlock Padding="10 10 0 0" Text="Moguće komande:" FontSize="14" Foreground="black" />
+                <TextBlock Padding="10 0 0 0" Text="promenipogled [0,1,2,3]" FontSize="12" Foreground="black" />
+                <TextBlock Padding="10 0 0 10" Text="opozovi" FontSize="12" Foreground="black" />
+
+                <TextBox x:Name="KomandaTerminala"></TextBox>
             </StackPanel>
         </Border>
     </Grid>

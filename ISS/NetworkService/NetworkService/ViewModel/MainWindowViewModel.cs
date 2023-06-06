@@ -3,6 +3,7 @@ using NetworkService.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -28,14 +29,7 @@ namespace NetworkService.ViewModel
         public static NetworkDisplayViewModel displayViewModel;
         #endregion
 
-        #region TRENUTNO PRIKAZAN VIEWMODEL
-        private BindableBase currentViewModel;
-        #endregion
-
-        #region LISTA I BROJ MREZNIH ENTITETA
-        public static ObservableCollection<Reaktor> PosmatraniReaktori { get; set; }
-        #endregion
-
+        #region KONSTRUKTOR
         public MainWindowViewModel()
         {
             // Povezivanje sa serverskom aplikacijom
@@ -51,12 +45,16 @@ namespace NetworkService.ViewModel
             displayViewModel = new NetworkDisplayViewModel();
 
             // Undo action
-            //undoAction = new MyICommand(OnUndoAction);
+            //undoCommand = new MyICommand(OnUndo);
 
+            // Početna je home
             CurrentViewModel = homeViewModel;
         }
+        #endregion
 
-        #region VIEWS
+        #region POGLEDI
+        private BindableBase currentViewModel;
+
         public BindableBase CurrentViewModel
         {
             get { return currentViewModel; }
@@ -68,6 +66,8 @@ namespace NetworkService.ViewModel
 
         private void OnNav(string destination)
         {
+            UndoDestinations.Add(destination);
+
             switch (destination)
             {
                 case "home":
@@ -82,6 +82,38 @@ namespace NetworkService.ViewModel
                 case "graphs":
                     CurrentViewModel = graphsViewModel;
                     break;
+            }
+        }
+        #endregion
+
+        #region BRISANJE
+        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (Reaktor newEntity in e.NewItems)
+                {
+                    if (!NetworkDisplayViewModel.NetworkServiceDevices.Contains(newEntity))
+                    {
+                        NetworkDisplayViewModel.NetworkServiceDevices.Add(newEntity);
+                    }
+                }
+            }
+
+            if (e.OldItems != null)
+            {
+                foreach (Reaktor oldEntity in e.OldItems)
+                {
+                    if (NetworkDisplayViewModel.NetworkServiceDevices.Contains(oldEntity))
+                    {
+                        NetworkDisplayViewModel.NetworkServiceDevices.Remove(oldEntity);
+                    }
+                    else
+                    {
+                        int canvasIndex = displayViewModel.GetCanvasIndexForEntityId(oldEntity.Id);
+                        displayViewModel.DeleteEntityFromCanvas(oldEntity);
+                    }
+                }
             }
         }
         #endregion
@@ -125,21 +157,23 @@ namespace NetworkService.ViewModel
                             // Obraditi poruku kako bi se dobile informacije o izmeni
                             // Azuriranje potrebnih stvari u aplikaciji
                             string incomingId = incomming.Substring(incomming.IndexOf('_') + 1, 1);
-                            int rbr = int.Parse(incomingId);
-                            int entityId = NetworkEntitiesViewModel.SviReaktori[rbr].Id;
                             double value = double.Parse(incomming.Substring(incomming.IndexOf(':') + 1));
 
-                            foreach (Reaktor r in NetworkEntitiesViewModel.SviReaktori)
+                            for (int idx = 0; idx < NetworkEntitiesViewModel.SviReaktori.Count; idx++)
                             {
-                                if (entityId == r.Id)
+                                string currentEntityId = $"Entitet_{idx}";
+                                if (currentEntityId == incomingId)
                                 {
-                                    r.Vrednost = value;
+                                    NetworkEntitiesViewModel.SviReaktori[idx].Vrednost = value;
 
                                     using (StreamWriter sr = File.AppendText("../../Log.txt"))
                                     {
                                         DateTime dateTime = DateTime.Now;
-                                        sr.WriteLine($"{dateTime},{r.Id},{value}");
+                                        sr.WriteLine($"{dateTime},{NetworkEntitiesViewModel.SviReaktori[idx].Tip.NazivTipa},{value}");
                                     }
+
+                                    displayViewModel.UpdateEntityOnCanvas(NetworkEntitiesViewModel.SviReaktori[idx]);
+                                    //MeasurementGraphViewModel.OnShow();
 
                                     break;
                                 }
@@ -154,10 +188,37 @@ namespace NetworkService.ViewModel
         }
         #endregion
 
-        // Ovo nije urađeno !!
         #region UNDO
-        //private MyICommand undoAction;
-        //public MyICommand UndoAction { get; set; }
+        private MyICommand undoCommand;
+        public MyICommand UndoCommand { get; set; }
+
+        // Destination
+        private List<string> UndoDestinations = new List<string>();
+
+        private void OnUndoNav()
+        {
+            if (UndoDestinations.Count > 1)
+            {
+                string destination = UndoDestinations.ElementAt(UndoDestinations.Count - 2);
+                
+                switch (destination)
+                {
+                    case "home":
+                        CurrentViewModel = homeViewModel;
+                        break;
+                    case "entities":
+                        CurrentViewModel = entitiesViewModel;
+                        break;
+                    case "display":
+                        CurrentViewModel = displayViewModel;
+                        break;
+                    case "graph":
+                        CurrentViewModel = graphsViewModel;
+                        break;
+                }
+                UndoDestinations.RemoveAt(UndoDestinations.Count - 1);
+            }
+        }
 
         //public static Object LastAction { get; set; }
         //public static Actions LastActionId { get; set; }
