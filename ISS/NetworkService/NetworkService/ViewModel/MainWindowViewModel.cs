@@ -156,24 +156,23 @@ namespace NetworkService.ViewModel
                             //################ IMPLEMENTACIJA ####################
                             // Obraditi poruku kako bi se dobile informacije o izmeni
                             // Azuriranje potrebnih stvari u aplikaciji
+
                             string incomingId = incomming.Substring(incomming.IndexOf('_') + 1, 1);
+                            int rbr = int.Parse(incomingId);
+                            int entityId = NetworkEntitiesViewModel.SviReaktori[rbr].Id;
                             double value = double.Parse(incomming.Substring(incomming.IndexOf(':') + 1));
 
-                            for (int idx = 0; idx < NetworkEntitiesViewModel.SviReaktori.Count; idx++)
+                            foreach (Reaktor d in NetworkEntitiesViewModel.SviReaktori)
                             {
-                                string currentEntityId = $"Entitet_{idx}";
-                                if (currentEntityId == incomingId)
+                                if (entityId == d.Id)
                                 {
-                                    NetworkEntitiesViewModel.SviReaktori[idx].Vrednost = value;
+                                    d.Vrednost = value;
 
-                                    using (StreamWriter sr = File.AppendText("../../Log.txt"))
+                                    using (StreamWriter sr = File.AppendText("Log.txt"))
                                     {
                                         DateTime dateTime = DateTime.Now;
-                                        sr.WriteLine($"{dateTime},{NetworkEntitiesViewModel.SviReaktori[idx].Tip.NazivTipa},{value}");
+                                        sr.WriteLine($"{dateTime},{d.Id},{value}");
                                     }
-
-                                    displayViewModel.UpdateEntityOnCanvas(NetworkEntitiesViewModel.SviReaktori[idx]);
-                                    //MeasurementGraphViewModel.OnShow();
 
                                     break;
                                 }

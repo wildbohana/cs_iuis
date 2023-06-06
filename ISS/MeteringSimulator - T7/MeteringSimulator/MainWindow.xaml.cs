@@ -21,6 +21,7 @@ namespace MeteringSimulator
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region KLASA
         private static double value = -1;
         private static int objectNum = 0;
         private int numObjects = -1;
@@ -38,7 +39,9 @@ namespace MeteringSimulator
             // Počni prijavljivanje novih vrednosti za objekte
             startReporting();
         }
+        #endregion
 
+        #region BROJ REAKTORA
         private void askForCount()
         {
             try
@@ -70,7 +73,9 @@ namespace MeteringSimulator
                 Console.WriteLine("Exception: {0}", e);
             }
         }
+        #endregion
 
+        #region MERENJE
         private void startReporting()
         {
             // Na random vreme pošalji izmenu vrednosti nekog random objekta i nastavi da to radiš u rekurziji
@@ -79,10 +84,17 @@ namespace MeteringSimulator
             {
                 this.Dispatcher.Invoke(() =>
                 {
-                    // Slanje izmene stanja nekog objekta
-                    sendReport();
-                    // Upis u text box, radi lakše provere
-                    textBox.Text = "Entity_" + objectNum + " changed state to: " + value.ToString() + "\n" + textBox.Text;
+                    if (numObjects > 0)
+                    {
+                        // Slanje izmene stanja nekog objekta
+                        sendReport();
+                        // Upis u text box, radi lakše provere
+                        textBox.Text = "Entity_" + objectNum + " changed state to: " + value.ToString() + "\n" + textBox.Text;
+                    }
+                    
+                    // ADDED:
+                    askForCount();
+
                     // Počni proces ispočetka
                     startReporting();
                 });
@@ -118,7 +130,9 @@ namespace MeteringSimulator
                 Console.WriteLine("Exception: {0}", e);
             }
         }
+        #endregion
 
+        #region EVENTI
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -129,5 +143,6 @@ namespace MeteringSimulator
             System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
             Application.Current.Shutdown();
         }
+        #endregion
     }
 }
